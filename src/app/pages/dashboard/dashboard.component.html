@@ -1,30 +1,38 @@
-<div class="container-fluid" style="height: 100vh;">
-  <div class="nav-style">
-    <nav>
-        <a href="">Home</a>
-        <a href="">Farms</a>
-        <a href="">Profile</a>
-        <a href="">Calendar</a>
-        <a href="">Logout</a>
-    </nav>
-  </div>
+<div class="container-fluid mt-4">
 
-  <div class="row mt-4">
-    <!-- left -->
-    <div class="col-lg-4 col-md-4">
-        <div class="weather-box">
-
-        </div>
+  <div class="row">
+    <!-- Left top column 1 -->
+    <div class="col-lg-3 col-md-3">
+        <div class="weather-box" style="height: 200px; background-color: #4CAF50;"></div>
     </div>
 
-    <!--right-->
-    <div class="col-lg-4 col-md-4">
-        <div class="info-box">
-
-        </div>
-        
+    <!-- Left top column 2 -->
+    <div class="col-lg-3 col-md-3">
+        <div class="info-box" style="height: 200px; background-color: #2196F3;"></div>
     </div>
 
+    <!-- Right column (taller) -->
+    <div class="col-lg-6 col-md-6">
+        <div class="map" style="height: 420px;">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=..." 
+                style="width:100%; height:100%; border:0; border-radius:10px;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+    </div>
   </div>
- 
+
+  <!-- New box under the two left columns -->
+  <div class="row mt-3">
+    <div class="col-lg-6 col-md-6">
+        <div class="extra-box" style="height: 200px; background-color: #FF9800;"></div>
+    </div>
+    
+    <!-- Empty space under the right column to align -->
+    <div class="col-lg-6 col-md-6"></div>
+  </div>
+
 </div>
