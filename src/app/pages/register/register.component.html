@@ -1,0 +1,74 @@
+<div class="vh-100 d-flex flex-row">
+
+  <!-- Left: Slideshow with fade -->
+  <div class="col-12 col-md-6 p-0">
+    <div id="registerCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner h-100">
+        <div class="carousel-item active h-100">
+          <img src="/istockphoto-543212762-612x612.jpg" class="d-block w-100 h-100" style="object-fit: cover;" alt="Slide 1">
+        </div>
+        <div class="carousel-item h-100">
+          <img src="/Crop676x507.jpg" class="d-block w-100 h-100" style="object-fit: cover;" alt="Slide 2">
+        </div>
+        <div class="carousel-item h-100">
+          <img src="/istockphoto-543212762-612x612.jpg" class="d-block w-100 h-100" style="object-fit: cover;" alt="Slide 3">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Form (no card, bigger layout) -->
+  <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+    <div class="w-75 p-5" style="background-color: rgba(255,255,255,0.85); border-radius: 20px;">
+
+      <h2 class="text-center mb-4" style="color: #367C2B; font-size: 2.2rem;">Plant Your First Farm Account</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <div class="row g-3">
+          <div class="col-6">
+            <input type="text" formControlName="firstName" placeholder="First Name" class="form-control underline-input input-lg">
+          </div>
+          <div class="col-6">
+            <input type="text" formControlName="lastName" placeholder="Last Name" class="form-control underline-input input-lg">
+          </div>
+        </div>
+
+        <div class="mb-3 mt-3">
+          <input type="email" formControlName="email" placeholder="Email" class="form-control underline-input input-lg">
+        </div>
+
+        <div class="mb-3">
+          <input type="password" formControlName="password" placeholder="Password" class="form-control underline-input input-lg">
+        </div>
+
+        <div class="mb-3 row g-3">
+          <div class="col-6">
+            <input type="text" formControlName="phoneNumber" placeholder="Phone Number" class="form-control underline-input input-lg">
+          </div>
+          <div class="col-6">
+            <input type="text" formControlName="postalCode" placeholder="Postal Code" class="form-control underline-input input-lg">
+          </div>
+        </div>
+
+        <div class="mb-3 row g-3">
+          <div class="col-6">
+            <input type="text" formControlName="city" placeholder="City" class="form-control underline-input input-lg">
+          </div>
+          <div class="col-6">
+            <input type="text" formControlName="province" placeholder="Province" class="form-control underline-input input-lg">
+          </div>
+        </div>
+
+        <button type="submit" class="btn w-100 mt-3 btn-lg" style="background-color: #367C2B; color: white; border-radius: 10px;">
+          Register
+        </button>
+      </form>
+
+      <p class="mt-4 text-center">
+        Already have an account? 
+        <a routerLink="/login" style="color: #367C2B; font-weight: 600;">Login</a>
+      </p>
+    </div>
+  </div>
+
+</div>

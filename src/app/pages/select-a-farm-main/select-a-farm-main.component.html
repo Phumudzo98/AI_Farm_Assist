@@ -1,0 +1,79 @@
+<div class="container mt-5 mb-5">
+  <!-- Welcome -->
+  <div>
+    <h1>Welcome {{ userName }}</h1>
+  </div>
+
+  <!-- Subtitle -->
+  <div class="mt-4 text-center">
+    <h3>Select a farm to manage or view</h3>
+  </div>
+
+  <!-- Search -->
+  <div class="d-flex justify-content-center align-items-center gap-2 mt-4">
+    <input
+      type="text"
+      id="search"
+      class="form-control"
+      [(ngModel)]="search"
+      placeholder="Enter farm name"
+      style="border: 2px solid #367C2B; border-radius: 10px; max-width: 300px;"
+    />
+    <button
+      class="btn"
+      style="background-color: #367C2B; color: white; border-radius: 10px;"
+      (click)="onSearch()"
+    >
+      Search
+    </button>
+  </div>
+
+  <!-- Farm Cards -->
+  <div class="row justify-content-center mt-5 g-4">
+    <!-- If user has farms -->
+    <ng-container *ngIf="farms.length > 0; else noFarms">
+      <div
+        class="col-12 col-sm-6 col-md-4 col-lg-3"
+        *ngFor="let farm of farms"
+      >
+        <div
+          class="card shadow-sm text-center h-100 d-flex flex-column align-items-center justify-content-center"
+          style="aspect-ratio: 1 / 1; border-radius: 20px; cursor: pointer; border: 3px solid #367C2B;"
+          (click)="goToFarm(farm.id)"
+        >
+          <img
+            [src]="farm.image"
+            [alt]="farm.name"
+            class="img-fluid rounded-circle"
+            style="width: 120px; height: 120px; object-fit: cover;"
+          />
+          <h5 class="mt-3">{{ farm.name }}</h5>
+        </div>
+      </div>
+
+      <!-- Add Farm Card -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div
+          class="card shadow-sm text-center h-100 d-flex align-items-center justify-content-center"
+          style="aspect-ratio: 1 / 1; border-radius: 20px; cursor: pointer; border: 3px dashed #367C2B;"
+          (click)="goToAddFarm()"
+        >
+          <h1 class="text-success">+</h1>
+        </div>
+      </div>
+    </ng-container>
+
+    <!-- If user has no farms -->
+    <ng-template #noFarms>
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <div
+          class="card shadow-sm text-center h-100 d-flex align-items-center justify-content-center"
+          style="aspect-ratio: 1 / 1; border-radius: 20px; cursor: pointer; border: 3px dashed #367C2B;"
+          (click)="goToAddFarm()"
+        >
+          <h1 class="text-success">+</h1>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

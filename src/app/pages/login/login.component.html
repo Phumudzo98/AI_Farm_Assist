@@ -1,0 +1,45 @@
+<div class="vh-100 d-flex flex-row">
+
+  <!-- Left: Slideshow -->
+  <div class="col-12 col-md-6 p-0">
+    <div id="loginCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel" data-bs-interval="3000">
+      <div class="carousel-inner h-100">
+        <div class="carousel-item active h-100">
+          <img src="/istockphoto-543212762-612x612.jpg" class="d-block w-100 h-100" style="object-fit: cover;" alt="Slide 1">
+        </div>
+        <div class="carousel-item h-100">
+          <img src="/Crop676x507.jpg" class="d-block w-100 h-100" style="object-fit: cover;" alt="Slide 2">
+        </div>
+        <div class="carousel-item h-100">
+          <img src="/istockphoto-543212762-612x612.jpg" class="d-block w-100 h-100" style="object-fit: cover;" alt="Slide 3">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Form (no card, bigger layout) -->
+  <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
+    <div class="w-75 p-5" style="background-color: rgba(255,255,255,0.85); border-radius: 20px;">
+
+      <h2 class="text-center mb-4" style="color: #367C2B; font-size: 2.2rem;">Welcome Back, Farmer!</h2>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="mb-3">
+          <input type="email" formControlName="email" placeholder="Email" class="form-control underline-input input-lg">
+        </div>
+        <div class="mb-3">
+          <input type="password" formControlName="password" placeholder="Password" class="form-control underline-input input-lg">
+        </div>
+        <button type="submit" class="btn w-100 mt-3 btn-lg" style="background-color: #367C2B; color: white; border-radius: 10px;">
+          Login
+        </button>
+      </form>
+
+      <p class="mt-4 text-center">
+        Don't have an account? 
+        <a routerLink="/register" style="color: #367C2B; font-weight: 600;">Register</a>
+      </p>
+    </div>
+  </div>
+
+</div>
