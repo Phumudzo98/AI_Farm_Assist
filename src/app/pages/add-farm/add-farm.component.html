@@ -1,0 +1,85 @@
+<div class="container mt-5">
+  <h2 class="mb-4" style="color: #367C2B;">Add Your Farm</h2>
+
+  <form [formGroup]="farmForm" (ngSubmit)="onSubmit()">
+
+    <!-- STEP 1: Farm Details -->
+    <div *ngIf="currentStep === 1">
+      <h4>Farm Information</h4>
+      <div class="mb-3">
+        <input type="text" formControlName="farm_name" placeholder="Farm Name" class="form-control underline-input input-lg">
+      </div>
+      <div class="mb-3">
+        <input type="text" formControlName="farm_type" placeholder="Farm Type" class="form-control underline-input input-lg">
+      </div>
+      <div class="mb-3">
+        <input type="text" formControlName="farm_location" placeholder="Farm Location" class="form-control underline-input input-lg">
+      </div>
+      <div class="mb-3">
+        <textarea formControlName="farm_description" placeholder="Farm Description" class="form-control underline-input input-lg" rows="3"></textarea>
+      </div>
+      <div class="mb-3 row g-2">
+        <div class="col-6">
+          <input type="number" formControlName="size" placeholder="Size" class="form-control underline-input input-lg">
+        </div>
+        <div class="col-6">
+          <input type="text" formControlName="metrics" placeholder="Metrics (ha, acres, etc.)" class="form-control underline-input input-lg">
+        </div>
+      </div>
+      <div class="mb-3">
+        <input type="text" formControlName="city" placeholder="City" class="form-control underline-input input-lg">
+      </div>
+      <div class="mb-3">
+        <label>Upload Farm Image</label>
+        <input type="file" (change)="onImageSelected($event)" class="form-control">
+      </div>
+
+      <button type="button" class="btn w-100 btn-lg mt-3" style="background-color: #367C2B; color: white;" (click)="nextStep()">Next</button>
+    </div>
+
+    <!-- STEP 2: Land Details -->
+    <div *ngIf="currentStep === 2">
+      <h4>Land Details</h4>
+
+      <div formArrayName="landDetails" *ngFor="let land of landDetails.controls; let i = index" [formGroupName]="i" class="mb-3 p-3">
+        <input type="text" formControlName="sectionName" placeholder="Section Name" class="form-control underline-input input-lg mb-2">
+        <input type="text" formControlName="soilType" placeholder="Soil Type" class="form-control underline-input input-lg mb-2">
+        <div class="row g-2 mb-2">
+          <div class="col-6">
+            <input type="date" formControlName="lastPlantedDate" class="form-control underline-input input-lg">
+          </div>
+          <div class="col-6">
+            <input type="date" formControlName="lastHarvestDate" class="form-control underline-input input-lg">
+          </div>
+        </div>
+        <input type="text" formControlName="irrigationType" placeholder="Irrigation Type" class="form-control underline-input input-lg mb-2">
+        <div class="form-check mb-2">
+          <input type="checkbox" formControlName="underCultivation" class="form-check-input">
+          <label class="form-check-label">Under Cultivation</label>
+        </div>
+        <div class="row g-2 mb-2">
+          <div class="col-6">
+            <input type="text" formControlName="latitude" placeholder="Latitude" class="form-control underline-input input-lg">
+          </div>
+          <div class="col-6">
+            <input type="text" formControlName="longitude" placeholder="Longitude" class="form-control underline-input input-lg">
+          </div>
+        </div>
+        <input type="text" formControlName="notes" placeholder="Notes" class="form-control underline-input input-lg mb-2">
+        <div class="row g-2">
+          <div class="col-6">
+            <input type="number" formControlName="size" placeholder="Size" class="form-control underline-input input-lg">
+          </div>
+          <div class="col-6">
+            <input type="text" formControlName="metrics" placeholder="Metrics" class="form-control underline-input input-lg">
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-outline-secondary mb-3" (click)="previousStep()">Previous</button>
+      <button type="submit" class="btn w-100 btn-lg" style="background-color: #367C2B; color: white;">Save Farm</button>
+      <button type="button" class="btn btn-outline-success mt-2" (click)="addLandDetail()">Add Another Land Section</button>
+    </div>
+
+  </form>
+</div>
