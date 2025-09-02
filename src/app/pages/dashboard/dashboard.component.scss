@@ -1,65 +1,132 @@
-.nav-style
-{
-    background-color: #795548;
-    margin-top: 2%;
-    height: 10%;
-    padding-top: 1.5%;
-     border-radius: 15px;
-   
+.dashboard-container {
+  position: relative;
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  overflow: hidden;
 }
 
-.container-fluid
-{
-    //background-image: url('C:/Users/phumu/AI_Farm_Assist/public/istockphoto-543212762-612x612.jpg'); /* put your image in src/assets/ */
-    background-size: cover;       
-    background-position: center;  
-    background-repeat: no-repeat; 
-    background-attachment: fixed;
-    height: 100%;
-    width: 100%;
+/* Background Image */
+.dashboard-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/istockphoto-543212762-612x612.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.6); /* Darken the image for better card contrast */
+  z-index: 1;
 }
 
-a
-{
-    margin: 5%;
-    color: white;
-    text-decoration: none;
+/* Overlay Content */
+.dashboard-content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
 }
 
-.weather-box, .info-box
-{
-    height: 200px;       
-    background-color: #4CAF50;
-    padding: 20px;
-    border-radius: 15px;
+/* Header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
 
-
-.cal-width
-{
-    width: 80%;
-   text-align: center;
+.dashboard-header h1 {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
-.activity
-{
-    height: 450px;       
-    background-color: #4CAF50;
-    padding: 20px;
-    border-radius: 15px;
+.btn-add-farm {
+  background-color: #367C2B;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
-
-.map iframe
-{
-    height: 250px;       
-    padding: 20px;
-    width: 100%;
-    border: 0;
-    border-radius: 15px;
+/* Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
-nav{
-     text-align: center;
-    
+/* Card base */
+.card {
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent for overlay effect */
+  border-radius: 20px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 350px; /* Vertical rectangular shape */
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.card-header h2 {
+  color: #367C2B;
+  font-size: 1.2rem;
+}
+
+/* Card Body */
+.card-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.card-body ul li {
+  background-color: #e1f3d8;
+  padding: 0.5rem;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+/* Weather Card */
+.weather-card .temperature {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  color: #367C2B;
+}
+
+/* Operations Buttons */
+.operations-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.operations-buttons button {
+  flex: 1 1 45%;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 2px solid #367C2B;
+  background-color: #fff;
+  color: #367C2B;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.operations-buttons button:hover {
+  background-color: #367C2B;
+  color: white;
 }
