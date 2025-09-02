@@ -2,9 +2,32 @@
   <!-- Background Image -->
   <div class="dashboard-bg"></div>
 
+  <!-- Top Header Strip -->
+  <div class="top-header">
+    <span class="menu-icon" (click)="toggleMenu()">☰</span>
+    <img class="profile-pic" [src]="userProfilePic" alt="User Profile" />
+  </div>
+
+  <!-- Sliding Side Menu -->
+ <!-- Sliding Side Menu -->
+<nav class="side-menu" [class.open]="menuOpen">
+  <!-- Close Button -->
+  <div class="close-btn" (click)="toggleMenu()">×</div>
+
+  <ul>
+    <li><a href="#">Dashboard</a></li>
+    <li><a href="#">Crops</a></li>
+    <li><a href="#">Livestock</a></li>
+    <li><a href="#">Irrigation</a></li>
+    <li><a href="#">Reports</a></li>
+    <li><a href="#">Settings</a></li>
+  </ul>
+</nav>
+
+
   <!-- Overlay Content -->
-  <div class="dashboard-content">
-    <!-- Header -->
+  <div class="dashboard-content" [class.shifted]="menuOpen">
+    <!-- Dashboard Header -->
     <header class="dashboard-header">
       <h1>{{ farmName }} Dashboard</h1>
       <button class="btn-add-farm" (click)="goToAddFarm()">Add New Farm</button>

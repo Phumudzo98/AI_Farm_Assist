@@ -1,8 +1,9 @@
+/* Container */
 .dashboard-container {
   position: relative;
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 /* Background Image */
@@ -12,21 +13,94 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('/istockphoto-543212762-612x612.jpg'); /* Replace with your image path */
+  background-image: url('/istockphoto-543212762-612x612.jpg');
   background-size: cover;
   background-position: center;
-  filter: brightness(0.6); /* Darken the image for better card contrast */
+  filter: brightness(0.6);
   z-index: 1;
+}
+
+/* Top Header Strip */
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #367C2B;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 3;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.menu-icon {
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+  object-fit: cover;
+}
+
+/* Side Menu */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #367C2B;
+  color: white;
+  padding-top: 60px;
+  transition: left 0.3s ease;
+  z-index: 4;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-menu ul li {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.side-menu ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.side-menu ul li a:hover {
+  text-decoration: underline;
 }
 
 /* Overlay Content */
 .dashboard-content {
   position: relative;
   z-index: 2;
-  padding: 2rem;
+  padding: 80px 2rem 2rem 2rem;
+  transition: transform 0.3s ease;
 }
 
-/* Header */
+.dashboard-content.shifted {
+  transform: translateX(250px);
+}
+
+/* Dashboard Header */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -56,15 +130,15 @@
   gap: 1.5rem;
 }
 
-/* Card base */
+/* Card Base */
 .card {
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent for overlay effect */
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  height: 350px; /* Vertical rectangular shape */
+  height: 350px;
 }
 
 /* Card Header */
