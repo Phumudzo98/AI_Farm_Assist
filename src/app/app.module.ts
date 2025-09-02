@@ -10,6 +10,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AddFarmComponent } from './pages/add-farm/add-farm.component';
 
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,8 @@ import { AddFarmComponent } from './pages/add-farm/add-farm.component';
     SelectAFarmMainComponent,
     LoginComponent,
     RegisterComponent,
-    AddFarmComponent
+    AddFarmComponent,
+    UpdateProfileComponent
   ],
   imports: [
     BrowserModule,

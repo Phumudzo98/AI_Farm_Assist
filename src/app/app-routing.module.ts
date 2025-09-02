@@ -6,7 +6,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import path from 'path';
 import { LoginComponent } from './pages/login/login.component';
 import { AddFarmComponent } from './pages/add-farm/add-farm.component';
-
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
 const routes: Routes = [
 
   {path: 'dashboard', component: DashboardComponent},
@@ -14,7 +14,8 @@ const routes: Routes = [
     {path:'select-a-farm', component: SelectAFarmMainComponent},
     {path:'register', component: RegisterComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'add-farm', component: AddFarmComponent}
+    {path: 'add-farm', component: AddFarmComponent},
+    {path: 'update-profile', component: UpdateProfileComponent}
 
 ];
 
