@@ -1,0 +1,34 @@
+<div class="ask-ai-container">
+  <h2 class="title">Ask AI</h2>
+  <p class="subtitle">Got any questions, farm-related?</p>
+
+  <div class="content-row">
+
+<div class="upload-box" (click)="fileInput.click()">
+ 
+  <ng-container *ngIf="previewUrl; else uploadIcon">
+    <img [src]="previewUrl" class="preview-image" alt="Uploaded Image">
+  </ng-container>
+
+  <ng-template #uploadIcon>
+    <img src="/upload.svg" class="upload-icon">
+    <p class="upload-label">Upload an image</p>
+  </ng-template>
+
+  <input type="file" hidden #fileInput (change)="onFileSelected($event)">
+</div>
+
+
+    <div class="message-box">
+      <textarea [(ngModel)]="message" placeholder="Enter a message..."></textarea>
+      <button class="send-btn" (click)="sendMessage()">Send</button>
+      <div class="ai-response" *ngIf="aiResponse">
+        {{ aiResponse }}
+      </div>
+    </div>
+  </div>
+
+  <p class="footer-text">
+    I'm stumped as a fence post until you ask something.
+  </p>
+</div>

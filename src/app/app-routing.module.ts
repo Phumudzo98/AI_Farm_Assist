@@ -7,6 +7,11 @@ import path from 'path';
 import { LoginComponent } from './pages/login/login.component';
 import { AddFarmComponent } from './pages/add-farm/add-farm.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { AskAiComponent } from './ask-ai/ask-ai.component';
+import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard.component';
+
+
+
 const routes: Routes = [
 
   {path: 'dashboard', component: DashboardComponent},
@@ -15,7 +20,9 @@ const routes: Routes = [
     {path:'register', component: RegisterComponent},
     {path: 'login', component: LoginComponent},
     {path: 'add-farm', component: AddFarmComponent},
-    {path: 'update-profile', component: UpdateProfileComponent}
+    {path: 'update-profile', component: UpdateProfileComponent},
+     {path: 'ask-ai', component: AskAiComponent},
+       {path: 'weather-dashboard', component: WeatherDashboardComponent}
 
 ];
 

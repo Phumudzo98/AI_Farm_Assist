@@ -11,6 +11,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AddFarmComponent } from './pages/add-farm/add-farm.component';
 
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { AskAiComponent } from './ask-ai/ask-ai.component';
+import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
     LoginComponent,
     RegisterComponent,
     AddFarmComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    AskAiComponent,
+    WeatherDashboardComponent
   ],
   imports: [
     BrowserModule,
