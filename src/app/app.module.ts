@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AddFarmComponent } from './pages/add-farm/add-farm.component';
+import { UpdateUserProfileComponent } from './pages/update-user-profile/update-user-profile.component';
+import { AiInteractionComponent } from './pages/ai-interaction/ai-interaction.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { AddFarmComponent } from './pages/add-farm/add-farm.component';
     SelectAFarmMainComponent,
     LoginComponent,
     RegisterComponent,
-    AddFarmComponent
+    AddFarmComponent,
+    UpdateUserProfileComponent,
+    AiInteractionComponent
   ],
   imports: [
     BrowserModule,

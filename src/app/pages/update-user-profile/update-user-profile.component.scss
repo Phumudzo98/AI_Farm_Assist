@@ -1,0 +1,24 @@
+.profile-pic-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #367C2B;
+  object-fit: cover;
+}
+
+.upload-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: #367C2B;
+  color: white;
+  border-radius: 50%;
+  padding: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+}

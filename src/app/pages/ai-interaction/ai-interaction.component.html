@@ -1,0 +1,33 @@
+<div class="ai-container">
+  <h2 class="title">AI Interaction</h2>
+
+  <!-- Upload Image -->
+  <div class="form-group">
+    <label for="imageUpload">Upload an Image:</label>
+    <input type="file" id="imageUpload" (change)="onImageUpload($event)" />
+  </div>
+
+  <!-- Preview -->
+  <div *ngIf="uploadedImage" class="preview">
+    <img [src]="uploadedImage" alt="Uploaded Preview" />
+  </div>
+
+  <!-- Text Input -->
+  <div class="form-group">
+    <label for="userText">Enter Your Text:</label>
+    <textarea
+      id="userText"
+      [(ngModel)]="userText"
+      placeholder="Type your message here..."
+    ></textarea>
+  </div>
+
+  <!-- Send Button -->
+  <button (click)="sendToAI()">Send to AI</button>
+
+  <!-- AI Response -->
+  <div *ngIf="aiResponse" class="response">
+    <strong>AI Response:</strong>
+    <p>{{ aiResponse }}</p>
+  </div>
+</div>

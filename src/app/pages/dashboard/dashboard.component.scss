@@ -1,103 +1,9 @@
 /* Container */
 .dashboard-container {
-  position: relative;
   min-height: 100vh;
   font-family: 'Roboto', sans-serif;
-  overflow-x: hidden;
-}
-
-/* Background Image */
-.dashboard-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url('/istockphoto-543212762-612x612.jpg');
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.6);
-  z-index: 1;
-}
-
-/* Top Header Strip */
-.top-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-  background-color: #367C2B;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-  z-index: 3;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.menu-icon {
-  font-size: 1.8rem;
-  color: white;
-  cursor: pointer;
-}
-
-.profile-pic {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 2px solid white;
-  object-fit: cover;
-}
-
-/* Side Menu */
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: -250px;
-  width: 250px;
-  height: 100%;
-  background-color: #367C2B;
-  color: white;
-  padding-top: 60px;
-  transition: left 0.3s ease;
-  z-index: 4;
-}
-
-.side-menu.open {
-  left: 0;
-}
-
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.side-menu ul li {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-
-.side-menu ul li a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.side-menu ul li a:hover {
-  text-decoration: underline;
-}
-
-/* Overlay Content */
-.dashboard-content {
-  position: relative;
-  z-index: 2;
-  padding: 80px 2rem 2rem 2rem;
-  transition: transform 0.3s ease;
-}
-
-.dashboard-content.shifted {
-  transform: translateX(250px);
+  background-color: #eaf6ec; /* Light green background */
+  padding: 2rem;
 }
 
 /* Dashboard Header */
@@ -109,98 +15,100 @@
 }
 
 .dashboard-header h1 {
-  color: white;
-  font-size: 2rem;
+  color: #205c3b;
+  font-size: 1.8rem;
   font-weight: bold;
 }
 
 .btn-add-farm {
-  background-color: #367C2B;
+  background-color: #205c3b;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   border: none;
-  border-radius: 10px;
+  border-radius: 8px;
+  font-weight: 500;
   cursor: pointer;
 }
 
 /* Grid */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
 }
 
 /* Card Base */
 .card {
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.3);
-  padding: 1rem;
+  background-color: white;
+  border-radius: 16px;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  height: 350px;
 }
 
-/* Card Header */
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Card Headers */
+.card-header h2 {
+  color: #205c3b;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
 }
 
-.card-header h2 {
-  color: #367C2B;
-  font-size: 1.2rem;
-}
-
-/* Card Body */
-.card-body ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  overflow-y: auto;
-}
-
-.card-body ul li {
-  background-color: #e1f3d8;
-  padding: 0.5rem;
-  border-radius: 10px;
-  margin-bottom: 0.5rem;
-}
-
-/* Weather Card */
+/* Weather */
 .weather-card .temperature {
   font-size: 2rem;
   font-weight: bold;
+  color: #205c3b;
+}
+
+.weather-card .condition {
+  margin-bottom: 1rem;
+  color: #444;
 }
 
 .weather-details {
   display: flex;
   justify-content: space-between;
   margin-top: 0.5rem;
-  color: #367C2B;
+  color: #205c3b;
+}
+
+/* AI Insights */
+.card-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-body ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #205c3b;
+  font-size: 0.95rem;
 }
 
 /* Operations Buttons */
 .operations-buttons {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.8rem;
 }
 
 .operations-buttons button {
-  flex: 1 1 45%;
-  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem;
   border-radius: 10px;
-  border: 2px solid #367C2B;
-  background-color: #fff;
-  color: #367C2B;
-  cursor: pointer;
+  border: none;
+  background-color: #f4faf5;
+  color: #205c3b;
   font-weight: 500;
+  cursor: pointer;
+  text-align: left;
 }
 
 .operations-buttons button:hover {
-  background-color: #367C2B;
-  color: white;
+  background-color: #d7f0db;
 }
