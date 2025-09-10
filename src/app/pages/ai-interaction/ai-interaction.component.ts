@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms'; 
 
 interface Message {
   sender: 'user' | 'ai';
@@ -13,7 +14,7 @@ interface Message {
   styleUrl: './ai-interaction.component.scss'
 })
 export class AiInteractionComponent {
-userText: string = '';
+  userText: string = '';
   uploadedImage: string | ArrayBuffer | null = null;
   aiResponse: string = '';
 

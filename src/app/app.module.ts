@@ -13,6 +13,7 @@ import { AddFarmComponent } from './pages/add-farm/add-farm.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { AskAiComponent } from './ask-ai/ask-ai.component';
 import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard.component';
+import { AiInteractionComponent } from './pages/ai-interaction/ai-interaction.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard
     AddFarmComponent,
     UpdateProfileComponent,
     AskAiComponent,
-    WeatherDashboardComponent
+    WeatherDashboardComponent, AiInteractionComponent
   ],
   imports: [
     BrowserModule,
