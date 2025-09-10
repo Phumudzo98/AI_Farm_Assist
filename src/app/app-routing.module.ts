@@ -6,19 +6,23 @@ import { RegisterComponent } from './pages/register/register.component';
 import path from 'path';
 import { LoginComponent } from './pages/login/login.component';
 import { AddFarmComponent } from './pages/add-farm/add-farm.component';
-import { UpdateUserProfileComponent } from './pages/update-user-profile/update-user-profile.component';
-import { AiInteractionComponent } from './pages/ai-interaction/ai-interaction.component';
+import { UpdateProfileComponent } from './update-profile/update-profile.component';
+import { AskAiComponent } from './ask-ai/ask-ai.component';
+import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard.component';
+
+
 
 const routes: Routes = [
 
   {path: 'dashboard', component: DashboardComponent},
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  {path:'select-a-farm', component: SelectAFarmMainComponent},
-  {path:'register', component: RegisterComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'add-farm', component: AddFarmComponent},
-  {path: 'update-user-profile', component: UpdateUserProfileComponent},
-  {path: 'ai-interaction', component: AiInteractionComponent}
+    {path:'select-a-farm', component: SelectAFarmMainComponent},
+    {path:'register', component: RegisterComponent},
+    {path: 'login', component: LoginComponent},
+    {path: 'add-farm', component: AddFarmComponent},
+    {path: 'update-profile', component: UpdateProfileComponent},
+     {path: 'ask-ai', component: AskAiComponent},
+       {path: 'weather-dashboard', component: WeatherDashboardComponent}
 
 ];
 
