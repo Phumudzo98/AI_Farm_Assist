@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -9,11 +9,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AddFarmComponent } from './pages/add-farm/add-farm.component';
-
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { AskAiComponent } from './ask-ai/ask-ai.component';
 import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard.component';
 import { AiInteractionComponent } from './pages/ai-interaction/ai-interaction.component';
+import { AuthInterceptor } from './core/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -25,15 +25,19 @@ import { AiInteractionComponent } from './pages/ai-interaction/ai-interaction.co
     AddFarmComponent,
     UpdateProfileComponent,
     AskAiComponent,
-    WeatherDashboardComponent, AiInteractionComponent
+    WeatherDashboardComponent,
+    AiInteractionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
