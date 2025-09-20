@@ -112,3 +112,184 @@
 .operations-buttons button:hover {
   background-color: #d7f0db;
 }
+
+/* Top Header Strip */
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #205c3b;
+  color: white;
+  position: relative;
+  z-index: 1000;
+}
+
+.menu-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Side Menu */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px; /* hidden by default */
+  width: 250px;
+  height: 100%;
+  background-color: #205c3b;
+  color: white;
+  padding: 2rem 1rem;
+  transition: left 0.3s ease-in-out;
+  z-index: 2000;
+}
+
+.side-menu.open {
+  left: 0; /* slides in when open */
+}
+
+.side-menu .close-btn {
+  font-size: 2rem;
+  cursor: pointer;
+  text-align: right;
+  margin-bottom: 2rem;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-menu ul li {
+  margin: 1rem 0;
+}
+
+.side-menu ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+/* Shift content when menu is open */
+.dashboard-content {
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.dashboard-content.shifted {
+  margin-left: 250px;
+}
+
+.dashboard-container {
+  min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  background-color: #eaf6ec;
+  padding: 2rem;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+  color: #205c3b;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.btn-add-farm {
+  background-color: #205c3b;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header h2 {
+  color: #205c3b;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.weather-card .temperature {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #205c3b;
+}
+
+.weather-card .condition {
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  color: #205c3b;
+}
+
+.operations-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.operations-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  background-color: #f4faf5;
+  color: #205c3b;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+}
+
+.operations-buttons button:hover {
+  background-color: #d7f0db;
+}
+
+.ai-recommendation {
+  background-color: #e6f4ea;
+  border-left: 4px solid #367C2B;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  color: #205c3b;
+}
+
+.ai-recommendation h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+

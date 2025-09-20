@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(email, password).subscribe({
       next: () => {
         this.isLoading = false;
-        this.router.navigate(['/dashboard']); // redirect on successful login
+        this.router.navigate(['/select-a-farm']);
       },
       error: (err) => {
         this.isLoading = false;

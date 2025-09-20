@@ -1,11 +1,42 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { environment } from '../../service/environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-a-farm-main',
   templateUrl: './select-a-farm-main.component.html',
   styleUrl: './select-a-farm-main.component.scss'
 })
-export class SelectAFarmMainComponent {
+export class SelectAFarmMainComponent implements OnInit{
+
+  apiUrl = environment.apiUrl;
+
+  constructor(private http: HttpClient, private router: Router)
+  {
+  }
+
+  
+
+  ngOnInit(): void {
+    
+   // this.getFarms();
+  }
+
+// getFarms() {
+//   this.http.get<any>(this.apiUrl + "/farm/get-farm").subscribe({
+//     next: (response) => {
+//       console.log("Farms received:", response);
+//       this.farms = response;
+//     },
+//     error: (err) => {
+//       console.error("Error fetching farms:", err);
+//       this.farms = []; // fallback so template renders
+//     }
+//   });
+// }
+
+
 userName = 'Phumudzo';
 
   // Example farms (can come from API later)
@@ -20,9 +51,9 @@ userName = 'Phumudzo';
   search = '';
 
   goToFarm(farmId: number) {
-    console.log('Navigating to farm:', farmId);
-    // Example: this.router.navigate(['/farm', farmId]);
-  }
+  console.log('Navigating to farm:', farmId);
+  this.router.navigate(['/dashboard', farmId]);
+}
 
   goToAddFarm() {
     console.log('Navigating to add farm');

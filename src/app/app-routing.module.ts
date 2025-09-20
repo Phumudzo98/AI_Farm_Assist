@@ -14,15 +14,15 @@ import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard
 
 const routes: Routes = [
 
-  {path: 'dashboard', component: DashboardComponent},
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    {path: 'dashboard/:id', component: DashboardComponent},
+    {path: '', redirectTo: '/login', pathMatch: 'full' },
     {path:'select-a-farm', component: SelectAFarmMainComponent},
     {path:'register', component: RegisterComponent},
     {path: 'login', component: LoginComponent},
     {path: 'add-farm', component: AddFarmComponent},
     {path: 'update-profile', component: UpdateProfileComponent},
-     {path: 'ask-ai', component: AskAiComponent},
-       {path: 'weather-dashboard', component: WeatherDashboardComponent}
+    {path: 'ask-ai', component: AskAiComponent},
+    {path: 'weather-dashboard', component: WeatherDashboardComponent}
 
 ];
 

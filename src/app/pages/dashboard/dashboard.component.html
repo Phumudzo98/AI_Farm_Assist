@@ -1,7 +1,4 @@
 <div class="dashboard-container">
-  <!-- Background Image -->
-  <div class="dashboard-bg"></div>
-
   <!-- Top Header Strip -->
   <div class="top-header">
     <span class="menu-icon" (click)="toggleMenu()">☰</span>
@@ -9,33 +6,27 @@
   </div>
 
   <!-- Sliding Side Menu -->
- <!-- Sliding Side Menu -->
-<nav class="side-menu" [class.open]="menuOpen">
-  <!-- Close Button -->
-  <div class="close-btn" (click)="toggleMenu()">×</div>
-
-  <ul>
-    <li><a href="#">Dashboard</a></li>
-    <li><a href="#">Crops</a></li>
-    <li><a href="#">Livestock</a></li>
-    <li><a href="#">Irrigation</a></li>
-    <li><a href="#">Reports</a></li>
-    <li><a href="#">Settings</a></li>
-  </ul>
-</nav>
-
+  <nav class="side-menu" [class.open]="menuOpen">
+    <div class="close-btn" (click)="toggleMenu()">×</div>
+    <ul>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Crops</a></li>
+      <li><a href="#">Livestock</a></li>
+      <li><a href="#">Irrigation</a></li>
+      <li><a href="#">Reports</a></li>
+      <li><a href="#">Settings</a></li>
+    </ul>
+  </nav>
 
   <!-- Overlay Content -->
   <div class="dashboard-content" [class.shifted]="menuOpen">
-    <!-- Dashboard Header -->
     <header class="dashboard-header">
       <h1>{{ farmName }} Dashboard</h1>
       <button class="btn-add-farm" (click)="goToAddFarm()">Add New Farm</button>
     </header>
 
-    <!-- Grid -->
     <div class="dashboard-grid">
-      <!-- Weather Widget -->
+      <!-- Weather Widget with AI Recommendation -->
       <div class="card weather-card">
         <div class="card-header">
           <h2>Weather</h2>
@@ -48,19 +39,14 @@
             <span>💧 {{ weather.humidity }}</span>
             <span>🌧️ {{ weather.rainfall }}</span>
           </div>
-        </div>
-      </div>
 
-      <!-- AI Insights -->
-      <div class="card ai-card">
-        <div class="card-header">
-          <h2>AI Insights</h2>
-          <span class="icon">🤖</span>
-        </div>
-        <div class="card-body">
-          <ul>
-            <li *ngFor="let insight of aiInsights">{{ insight }}</li>
-          </ul>
+          <!-- AI Watering Recommendation -->
+          <div class="ai-recommendation mt-3">
+            <h4>💡 Watering Advice</h4>
+            <ul>
+              <li *ngFor="let insight of aiInsights">{{ insight }}</li>
+            </ul>
+          </div>
         </div>
       </div>
 
