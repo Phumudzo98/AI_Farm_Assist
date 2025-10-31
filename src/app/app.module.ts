@@ -20,6 +20,8 @@ import { ViewLandComponent } from './view-land/view-land.component';
 import { LandListComponent } from './land-list/land-list.component';
 import { CropListComponent } from './crop-list/crop-list.component';
 import { ViewCropComponent } from './view-crop/view-crop.component';
+import { PestDiseaseComponent } from './pest-disease/pest-disease.component';
+import { PestDiseaseListComponent } from './pest-disease-list/pest-disease-list.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { ViewCropComponent } from './view-crop/view-crop.component';
     ViewLandComponent,
     LandListComponent,
     CropListComponent,
-    ViewCropComponent
+    ViewCropComponent,
+    PestDiseaseComponent,
+    PestDiseaseListComponent
   ],
   imports: [
     BrowserModule,

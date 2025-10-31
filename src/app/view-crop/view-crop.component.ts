@@ -25,4 +25,14 @@ export class ViewCropComponent implements OnInit {
   goBack() {
     this.router.navigate(['/crop-list']);
   }
+
+ 
+  addPestDisease(cropId: number) {
+    this.router.navigate(['/pest-disease', cropId]); 
+  }
+
+
+  viewPestDiseases(cropId: number) {
+    this.router.navigate(['/pest-disease-list', cropId]); 
+  }
 }

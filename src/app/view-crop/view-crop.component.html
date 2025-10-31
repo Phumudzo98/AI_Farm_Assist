@@ -1,7 +1,7 @@
 <div class="crop-details-container">
   <button class="back-btn" (click)="goBack()">← Back to Crop List</button>
 
- <div class="title-wrapper">
+  <div class="title-wrapper">
     <h2 class="page-title">Crop Details</h2>
   </div>
 
@@ -10,25 +10,36 @@
       <span class="label">Name:</span>
       <span class="value">{{ crop.name }}</span>
     </div>
-
     <div class="detail-row">
       <span class="label">Type:</span>
       <span class="value">{{ crop.type }}</span>
     </div>
-
     <div class="detail-row">
       <span class="label">Planted Date:</span>
       <span class="value">{{ crop.plantedDate | date }}</span>
     </div>
-
     <div class="detail-row">
       <span class="label">Expected Harvest:</span>
       <span class="value">{{ crop.expectedHarvest | date }}</span>
     </div>
-
     <div class="detail-row">
       <span class="label">Yield:</span>
       <span class="value">{{ crop.yield }} kg</span>
     </div>
+  </div>
+
+
+  <div class="action-buttons mt-3">
+    <button class="btn btn-outline-success me-2 add-pest-btn" (click)="addPestDisease(crop.id)">
+    Add Pest/Disease
+    </button>
+
+        <button 
+    class="btn me-2" 
+    (click)="viewPestDiseases(crop.id)" 
+    style="background-color: #367C2B; color: white; border-radius: 5px; border: none;">
+    View Pest/Disease Records
+    </button>
+
   </div>
 </div>

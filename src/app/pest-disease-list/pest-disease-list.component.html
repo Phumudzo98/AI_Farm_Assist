@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Pest/Disease Records</h2>
+    <button class="btn btn-success" (click)="addNew()">+ Add Record</button>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-success">
+      <tr>
+        <th>#</th>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Severity</th>
+        <th>Detection Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of records; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ record.type }}</td>
+        <td>{{ record.name }}</td>
+        <td>{{ record.severity }}</td>
+        <td>{{ record.detectionDate | date }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary me-2" (click)="editRecord(record.id)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteRecord(record.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+<p class="mt-4 text-center">
+  Back to 
+  <a [routerLink]="['/view-crop', 1]" style="color: #367C2B; font-weight: 600;">
+    Crop Details
+  </a>
+</p>
+
+
+ 
+</div>

@@ -15,6 +15,8 @@ import { ViewLandComponent } from './view-land/view-land.component';
 import { LandListComponent } from './land-list/land-list.component';
 import { CropListComponent } from './crop-list/crop-list.component';
 import { ViewCropComponent } from './view-crop/view-crop.component';
+import {PestDiseaseComponent } from './pest-disease/pest-disease.component';
+import { PestDiseaseListComponent } from './pest-disease-list/pest-disease-list.component';
 
 const routes: Routes = [
 
@@ -34,7 +36,11 @@ const routes: Routes = [
     {path:'land-list', component: LandListComponent },
      {path:'view-crop/:id', component:ViewCropComponent },
     {path:'crop-list', component: CropListComponent  },
-
+    {path:'pest-disease', component: PestDiseaseComponent },
+ { path: 'pest-disease/:cropId', component: PestDiseaseComponent }, 
+     
+   {path:'pest-disease-list', component: PestDiseaseListComponent },
+      {path:'pest-disease-list/:id', component: PestDiseaseListComponent },
 ];
 
 @NgModule({

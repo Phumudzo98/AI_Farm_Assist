@@ -70,3 +70,12 @@
 .value {
   color: #333;
 }
+.add-pest-btn {
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: #367C2B;
+    color: white;
+    border-color: #367C2B;
+  }
+}
