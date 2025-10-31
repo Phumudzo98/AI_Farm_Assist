@@ -13,6 +13,8 @@ import { CropFormComponent } from './crop-form/crop-form.component';
 import { LandFormComponent } from './land-form/land-form.component';
 import { ViewLandComponent } from './view-land/view-land.component';
 import { LandListComponent } from './land-list/land-list.component';
+import { CropListComponent } from './crop-list/crop-list.component';
+import { ViewCropComponent } from './view-crop/view-crop.component';
 
 const routes: Routes = [
 
@@ -25,10 +27,13 @@ const routes: Routes = [
     {path: 'update-profile', component: UpdateProfileComponent},
     {path: 'ask-ai', component: AskAiComponent},
     {path: 'weather-dashboard', component: WeatherDashboardComponent},
+    {path: 'crop-form/:id', component:  CropFormComponent},
     {path: 'crop-form', component:  CropFormComponent},
     {path:'land-form', component: LandFormComponent},
     {path:'view-land', component: ViewLandComponent},
     {path:'land-list', component: LandListComponent },
+     {path:'view-crop/:id', component:ViewCropComponent },
+    {path:'crop-list', component: CropListComponent  },
 
 ];
 

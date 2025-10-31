@@ -25,7 +25,7 @@ export class CropFormComponent implements OnInit {
     this.cropId = Number(this.route.snapshot.paramMap.get('id'));
     this.isEditMode = !!this.cropId;
 
-    // 🔹 Reactive Form setup
+
     this.cropForm = this.fb.group({
       cropName: ['', Validators.required],
       variety: [''],

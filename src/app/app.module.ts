@@ -18,6 +18,8 @@ import { CropFormComponent } from './crop-form/crop-form.component';
 import { LandFormComponent } from './land-form/land-form.component';
 import { ViewLandComponent } from './view-land/view-land.component';
 import { LandListComponent } from './land-list/land-list.component';
+import { CropListComponent } from './crop-list/crop-list.component';
+import { ViewCropComponent } from './view-crop/view-crop.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { LandListComponent } from './land-list/land-list.component';
     CropFormComponent,
     LandFormComponent,
     ViewLandComponent,
-    LandListComponent
+    LandListComponent,
+    CropListComponent,
+    ViewCropComponent
   ],
   imports: [
     BrowserModule,

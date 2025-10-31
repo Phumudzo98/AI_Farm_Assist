@@ -1,0 +1,34 @@
+<div class="crop-details-container">
+  <button class="back-btn" (click)="goBack()">← Back to Crop List</button>
+
+ <div class="title-wrapper">
+    <h2 class="page-title">Crop Details</h2>
+  </div>
+
+  <div *ngIf="crop" class="crop-card">
+    <div class="detail-row">
+      <span class="label">Name:</span>
+      <span class="value">{{ crop.name }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Type:</span>
+      <span class="value">{{ crop.type }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Planted Date:</span>
+      <span class="value">{{ crop.plantedDate | date }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Expected Harvest:</span>
+      <span class="value">{{ crop.expectedHarvest | date }}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="label">Yield:</span>
+      <span class="value">{{ crop.yield }} kg</span>
+    </div>
+  </div>
+</div>

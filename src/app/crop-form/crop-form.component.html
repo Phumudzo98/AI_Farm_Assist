@@ -1,8 +1,6 @@
 <div class="vh-100 d-flex align-items-center justify-content-center" style="background-color: #eaf6ec;">
   <div class="w-75 w-md-50 p-5" style="background-color: rgba(255,255,255,0.95); border-radius: 20px;">
 
-
-
     <h2 class="text-center mb-4" style="color: #367C2B; font-size: 2rem;">
       {{ isEditMode ? 'Edit Crop' : 'Add New Crop' }}
     </h2>
@@ -17,34 +15,22 @@
         </div>
       </div>
 
-        <div class="row g-3 mt-3">
-    <div class="col-6">
-        <label class="form-label small-label">Planting Date</label>
-        <input 
-        type="date" 
-        formControlName="plantingDate" 
-        class="form-control underline-input input-lg date-input">
-    </div>
-
-    <div class="col-6">
-        <label class="form-label small-label">Expected Harvest Date</label>
-        <input 
-        type="date" 
-        formControlName="expectedHarvestDate" 
-        class="form-control underline-input input-lg date-input">
-    </div>
-    </div>
-
-
-      
       <div class="row g-3 mt-3">
-  <div class="col-6">
-    <label class="form-label small-label">Actual Harvest Date</label>
-    <input 
-      type="date" 
-      formControlName="actualHarvestDate" 
-      class="form-control underline-input input-lg date-input">
-  </div>
+        <div class="col-6">
+          <label class="form-label small-label">Planting Date</label>
+          <input type="date" formControlName="plantingDate" class="form-control underline-input input-lg date-input">
+        </div>
+        <div class="col-6">
+          <label class="form-label small-label">Expected Harvest Date</label>
+          <input type="date" formControlName="expectedHarvestDate" class="form-control underline-input input-lg date-input">
+        </div>
+      </div>
+
+      <div class="row g-3 mt-3">
+        <div class="col-6">
+          <label class="form-label small-label">Actual Harvest Date</label>
+          <input type="date" formControlName="actualHarvestDate" class="form-control underline-input input-lg date-input">
+        </div>
         <div class="col-3">
           <input type="number" step="0.01" formControlName="yield" placeholder="Yield" class="form-control underline-input input-lg">
         </div>
@@ -83,7 +69,7 @@
 
     <p class="mt-4 text-center">
       Want to go back? 
-      <a routerLink="/crops" style="color: #367C2B; font-weight: 600;">Crop List</a>
+      <a routerLink="/crop-list" style="color: #367C2B; font-weight: 600;">Crop List</a>
     </p>
   </div>
 </div>
