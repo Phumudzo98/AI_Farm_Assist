@@ -11,7 +11,8 @@ import { AskAiComponent } from './ask-ai/ask-ai.component';
 import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard.component';
 import { CropFormComponent } from './crop-form/crop-form.component';
 import { LandFormComponent } from './land-form/land-form.component';
-
+import { ViewLandComponent } from './view-land/view-land.component';
+import { LandListComponent } from './land-list/land-list.component';
 
 const routes: Routes = [
 
@@ -26,6 +27,9 @@ const routes: Routes = [
     {path: 'weather-dashboard', component: WeatherDashboardComponent},
     {path: 'crop-form', component:  CropFormComponent},
     {path:'land-form', component: LandFormComponent},
+    {path:'view-land', component: ViewLandComponent},
+    {path:'land-list', component: LandListComponent },
+
 ];
 
 @NgModule({

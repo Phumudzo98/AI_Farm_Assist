@@ -1,0 +1,40 @@
+<div class="vh-100 d-flex align-items-center justify-content-center" style="background-color: #eaf6ec;">
+  <div class="container w-75 p-5 land-card">
+    
+    <h2 class="text-center mb-4" style="color: #367C2B;">🌱 Land Details</h2>
+
+    <div class="land-info">
+      <div class="row g-3">
+        <div class="col-md-6">
+          <p><strong>Section Name:</strong> {{ land.sectionName }}</p>
+          <p><strong>Soil Type:</strong> {{ land.soilType }}</p>
+          <p><strong>Irrigation Type:</strong> {{ land.irrigationType }}</p>
+          <p><strong>Under Cultivation:</strong> 
+            <span [ngClass]="land.underCultivation ? 'status-active' : 'status-inactive'">
+              {{ land.underCultivation ? 'Yes' : 'No' }}
+            </span>
+          </p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Last Planted Date:</strong> {{ land.lastPlantedDate | date }}</p>
+          <p><strong>Last Harvest Date:</strong> {{ land.lastHarvestDate | date }}</p>
+          <p><strong>Size:</strong> {{ land.size }} {{ land.metrics }}</p>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <p><strong>Latitude:</strong> {{ land.latitude }}</p>
+        <p><strong>Longitude:</strong> {{ land.longitude }}</p>
+        <p><strong>Notes:</strong></p>
+        <p class="notes-box">{{ land.notes || 'No notes available.' }}</p>
+      </div>
+
+      <div class="text-center mt-4">
+        <button class="btn btn-lg" style="background-color: #367C2B; color: white; border-radius: 10px;"
+                (click)="goBack()">
+          ← Back to Land List
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

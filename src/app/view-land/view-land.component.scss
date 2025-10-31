@@ -1,0 +1,29 @@
+.land-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.land-info p {
+  font-size: 1rem;
+  color: #333;
+  margin: 5px 0;
+}
+
+.status-active {
+  color: #367C2B;
+  font-weight: 600;
+}
+
+.status-inactive {
+  color: #888;
+  font-weight: 600;
+}
+
+.notes-box {
+  background-color: #f4f9f4;
+  border-left: 4px solid #367C2B;
+  padding: 10px;
+  border-radius: 5px;
+  color: #555;
+}

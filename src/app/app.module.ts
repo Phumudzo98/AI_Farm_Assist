@@ -16,6 +16,8 @@ import { AiInteractionComponent } from './pages/ai-interaction/ai-interaction.co
 import { AuthInterceptor } from './core/auth.interceptor';
 import { CropFormComponent } from './crop-form/crop-form.component';
 import { LandFormComponent } from './land-form/land-form.component';
+import { ViewLandComponent } from './view-land/view-land.component';
+import { LandListComponent } from './land-list/land-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { LandFormComponent } from './land-form/land-form.component';
     WeatherDashboardComponent,
     AiInteractionComponent,
     CropFormComponent,
-    LandFormComponent
+    LandFormComponent,
+    ViewLandComponent,
+    LandListComponent
   ],
   imports: [
     BrowserModule,

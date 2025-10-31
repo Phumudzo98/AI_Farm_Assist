@@ -1,0 +1,40 @@
+<div class="vh-100 d-flex align-items-center justify-content-center" style="background-color: #eaf6ec;">
+  <div class="container w-75 p-4 land-list-card">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2 style="color: #367C2B;">🌾 Land List</h2>
+      <button class="btn btn-success" style="background-color: #367C2B; border-radius: 10px;" routerLink="/land-form">
+        + Add New Land
+      </button>
+    </div>
+
+    <div *ngIf="lands.length > 0; else noLands">
+      <div class="row g-3">
+        <div class="col-md-6" *ngFor="let land of lands">
+          <div class="land-card p-3">
+            <h5 style="color: #367C2B;">{{ land.sectionName }}</h5>
+            <p><strong>Soil Type:</strong> {{ land.soilType }}</p>
+            <p><strong>Size:</strong> {{ land.size }} {{ land.metrics }}</p>
+            <p><strong>Under Cultivation:</strong>
+              <span [ngClass]="land.underCultivation ? 'status-active' : 'status-inactive'">
+                {{ land.underCultivation ? 'Yes' : 'No' }}
+              </span>
+            </p>
+
+            <div class="d-flex justify-content-between mt-3">
+              <button class="btn btn-outline-success btn-sm" (click)="viewLand()">View</button>
+              <button class="btn btn-outline-danger btn-sm" (click)="deleteLand(land.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noLands>
+      <div class="text-center mt-5">
+        <p class="text-muted">No lands found. Add your first one!</p>
+      </div>
+    </ng-template>
+
+  </div>
+</div>
