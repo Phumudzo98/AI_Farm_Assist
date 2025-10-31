@@ -1,0 +1,41 @@
+.container {
+  margin-top: 2rem;
+
+  .back-btn {
+    background-color: #367C2B;
+    color: white;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    &:hover {
+      background-color: #2c5d1d;
+    }
+  }
+
+  .page-title {
+    color: #367C2B;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+  }
+
+  .soil-card {
+    background-color: #f0fff4;
+    border-radius: 12px;
+    padding: 2rem;
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #d4edda;
+
+      .label {
+        font-weight: 500;
+        color: #2f4f2f;
+      }
+
+      .value {
+        color: #333;
+      }
+    }
+  }
+}

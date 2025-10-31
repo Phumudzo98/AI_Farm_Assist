@@ -17,6 +17,8 @@ import { CropListComponent } from './crop-list/crop-list.component';
 import { ViewCropComponent } from './view-crop/view-crop.component';
 import {PestDiseaseComponent } from './pest-disease/pest-disease.component';
 import { PestDiseaseListComponent } from './pest-disease-list/pest-disease-list.component';
+import { SoilInfoComponent } from './soil-info/soil-info.component';
+import { TaskActivityComponent } from './task-activity/task-activity.component';
 
 const routes: Routes = [
 
@@ -33,14 +35,17 @@ const routes: Routes = [
     {path: 'crop-form', component:  CropFormComponent},
     {path:'land-form', component: LandFormComponent},
     {path:'view-land', component: ViewLandComponent},
+    { path: 'view-land/:id', component: ViewLandComponent },
+
     {path:'land-list', component: LandListComponent },
      {path:'view-crop/:id', component:ViewCropComponent },
     {path:'crop-list', component: CropListComponent  },
     {path:'pest-disease', component: PestDiseaseComponent },
- { path: 'pest-disease/:cropId', component: PestDiseaseComponent }, 
-     
-   {path:'pest-disease-list', component: PestDiseaseListComponent },
-      {path:'pest-disease-list/:id', component: PestDiseaseListComponent },
+    { path: 'pest-disease/:cropId', component: PestDiseaseComponent }, 
+    {path:'pest-disease-list', component: PestDiseaseListComponent },
+    {path:'pest-disease-list/:id', component: PestDiseaseListComponent },
+    { path: 'soil-info/:id', component: SoilInfoComponent },
+   { path: 'task-activity/:id', component: TaskActivityComponent },
 ];
 
 @NgModule({

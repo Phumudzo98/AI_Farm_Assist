@@ -35,9 +35,10 @@ export class LandListComponent implements OnInit {
     ];
   }
 
-  viewLand() {
-    this.router.navigate(['/view-land']);
-  }
+ viewLand(landId: number) {
+  this.router.navigate(['/view-land', landId]);
+}
+
 
   deleteLand(id: number): void {
     if (confirm('Are you sure you want to delete this land?')) {

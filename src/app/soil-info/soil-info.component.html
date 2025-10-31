@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <button class="btn btn-lg back-btn mb-3" (click)="goBack()">← Back to Land Details</button>
+
+  <h2 class="mb-4 page-title">Soil Information</h2>
+
+  <div *ngIf="soil" class="soil-card p-4">
+    <div class="info-row">
+      <span class="label">Soil Type:</span>
+      <span class="value">{{ soil.soilType }}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">pH Level:</span>
+      <span class="value">{{ soil.phLevel }}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Moisture Level:</span>
+      <span class="value">{{ soil.moistureLevel }}%</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Nitrogen:</span>
+      <span class="value">{{ soil.nitrogen }}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Phosphorus:</span>
+      <span class="value">{{ soil.phosphorus }}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Potassium:</span>
+      <span class="value">{{ soil.potassium }}</span>
+    </div>
+    <div class="info-row">
+      <span class="label">Last Tested:</span>
+      <span class="value">{{ soil.lastTestedDate | date }}</span>
+    </div>
+  </div>
+</div>

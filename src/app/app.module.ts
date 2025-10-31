@@ -22,6 +22,8 @@ import { CropListComponent } from './crop-list/crop-list.component';
 import { ViewCropComponent } from './view-crop/view-crop.component';
 import { PestDiseaseComponent } from './pest-disease/pest-disease.component';
 import { PestDiseaseListComponent } from './pest-disease-list/pest-disease-list.component';
+import { SoilInfoComponent } from './soil-info/soil-info.component';
+import { TaskActivityComponent } from './task-activity/task-activity.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { PestDiseaseListComponent } from './pest-disease-list/pest-disease-list.
     CropListComponent,
     ViewCropComponent,
     PestDiseaseComponent,
-    PestDiseaseListComponent
+    PestDiseaseListComponent,
+    SoilInfoComponent,
+    TaskActivityComponent
   ],
   imports: [
     BrowserModule,

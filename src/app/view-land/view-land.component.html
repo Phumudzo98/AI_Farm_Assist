@@ -1,6 +1,6 @@
 <div class="vh-100 d-flex align-items-center justify-content-center" style="background-color: #eaf6ec;">
-  <div class="container w-75 p-5 land-card">
-    
+  <div class="container w-75 p-5 land-card" *ngIf="land">
+
     <h2 class="text-center mb-4" style="color: #367C2B;">🌱 Land Details</h2>
 
     <div class="land-info">
@@ -30,9 +30,19 @@
       </div>
 
       <div class="text-center mt-4">
-        <button class="btn btn-lg" style="background-color: #367C2B; color: white; border-radius: 10px;"
+        <button class="btn btn-lg me-2" style="background-color: #367C2B; color: white; border-radius: 10px;"
                 (click)="goBack()">
           ← Back to Land List
+        </button>
+
+        <button class="btn btn-lg me-2" style="background-color: #367C2B; color: white; border-radius: 10px;"
+                (click)="viewSoilInfo()">
+          Soil Information
+        </button>
+
+        <button class="btn btn-lg" style="background-color: #367C2B; color: white; border-radius: 10px;"
+                (click)="viewTaskActivity()">
+          Task Activity
         </button>
       </div>
     </div>

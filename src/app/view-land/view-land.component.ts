@@ -12,10 +12,16 @@ export class ViewLandComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
-    const landId = this.route.snapshot.paramMap.get('id');
+    const landIdParam = this.route.snapshot.paramMap.get('id');
+    const landId = landIdParam ? +landIdParam : null; 
+    if (!landId) {
+      console.error('Invalid or missing land ID!');
+      this.router.navigate(['/land-list']);
+      return;
+    }
+
     console.log('Viewing land with ID:', landId);
 
-   
     this.land = {
       id: landId,
       sectionName: 'Plot A',
@@ -34,5 +40,15 @@ export class ViewLandComponent implements OnInit {
 
   goBack(): void {
     this.router.navigate(['/land-list']);
+  }
+
+  viewSoilInfo(): void {
+    if (!this.land?.id) return;
+    this.router.navigate(['/soil-info', this.land.id]);
+  }
+
+  viewTaskActivity(): void {
+    if (!this.land?.id) return;
+    this.router.navigate(['/task-activity', this.land.id]);
   }
 }
