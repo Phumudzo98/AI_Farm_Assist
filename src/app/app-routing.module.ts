@@ -9,7 +9,8 @@ import { AddFarmComponent } from './pages/add-farm/add-farm.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
 import { AskAiComponent } from './ask-ai/ask-ai.component';
 import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard.component';
-
+import { CropFormComponent } from './crop-form/crop-form.component';
+import { LandFormComponent } from './land-form/land-form.component';
 
 
 const routes: Routes = [
@@ -22,8 +23,9 @@ const routes: Routes = [
     {path: 'add-farm', component: AddFarmComponent},
     {path: 'update-profile', component: UpdateProfileComponent},
     {path: 'ask-ai', component: AskAiComponent},
-    {path: 'weather-dashboard', component: WeatherDashboardComponent}
-
+    {path: 'weather-dashboard', component: WeatherDashboardComponent},
+    {path: 'crop-form', component:  CropFormComponent},
+    {path:'land-form', component: LandFormComponent},
 ];
 
 @NgModule({

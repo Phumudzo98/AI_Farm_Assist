@@ -1,0 +1,83 @@
+<div class="vh-100 d-flex align-items-center justify-content-center" style="background-color: #eaf6ec;">
+  <div class="w-75 w-md-60 p-5 form-container">
+
+    <h2 class="text-center mb-4" style="color: #367C2B;">
+      {{ isEditMode ? 'Edit Land Plot' : 'Add New Land Plot' }}
+    </h2>
+
+    <form [formGroup]="landForm" (ngSubmit)="onSubmit()" *ngIf="!loading; else loadingSpinner">
+      <div class="row g-3">
+        <div class="col-6">
+          <input type="text" formControlName="sectionName" placeholder="Section Name" class="form-control underline-input input-lg">
+        </div>
+        <div class="col-6">
+          <input type="text" formControlName="soilType" placeholder="Soil Type" class="form-control underline-input input-lg">
+        </div>
+      </div>
+
+            <div class="row g-3 mt-3">
+        <div class="col-6">
+            <label class="small-label">Last Planted Date</label>
+            <input type="date" formControlName="lastPlantedDate" class="form-control underline-input input-lg date-input">
+        </div>
+        <div class="col-6">
+            <label class="small-label">Last Harvest Date</label>
+            <input type="date" formControlName="lastHarvestDate" class="form-control underline-input input-lg date-input">
+        </div>
+        </div>
+
+
+    <div class="row g-3 mt-3">
+    <div class="col-6">
+        <input type="text" formControlName="irrigationType" placeholder="Irrigation Type" class="form-control underline-input input-lg">
+    </div>
+    <div class="col-6 d-flex align-items-center">
+        <label class="custom-checkbox">
+        Under Cultivation
+        <input type="checkbox" formControlName="underCultivation">
+        <span class="checkmark"></span>
+        </label>
+    </div>
+    </div>
+
+
+
+      <div class="row g-3 mt-3">
+        <div class="col-6">
+          <input type="text" formControlName="latitude" placeholder="Latitude" class="form-control underline-input input-lg">
+        </div>
+        <div class="col-6">
+          <input type="text" formControlName="longitude" placeholder="Longitude" class="form-control underline-input input-lg">
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <textarea formControlName="notes" placeholder="Notes" class="form-control underline-input input-lg" rows="3"></textarea>
+      </div>
+
+      <div class="row g-3 mt-3">
+        <div class="col-6">
+          <input type="number" formControlName="size" placeholder="Size" class="form-control underline-input input-lg">
+        </div>
+        <div class="col-6">
+          <input type="text" formControlName="metrics" placeholder="Metrics (e.g., acres, hectares)" class="form-control underline-input input-lg">
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-green w-100 mt-4 btn-lg">
+        {{ isEditMode ? 'Update Land' : 'Save Land' }}
+      </button>
+    </form>
+
+    <ng-template #loadingSpinner>
+      <div class="text-center py-5">
+        <div class="spinner-border text-success" role="status"></div>
+        <p class="mt-3 text-success">Loading land details...</p>
+      </div>
+    </ng-template>
+
+    <p class="mt-4 text-center">
+      <a routerLink="/lands" style="color: #367C2B; font-weight: 600;">Back to Land List</a>
+    </p>
+  </div>
+</div>

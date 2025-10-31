@@ -1,0 +1,64 @@
+.crop-icon-container {
+  display: inline-block;
+  background-color: #367C2B;
+  border-radius: 50%;
+  padding: 15px;
+}
+
+.crop-icon {
+  width: 70px;
+  height: 70px;
+  filter: brightness(0) invert(1);
+}
+
+.form-control.underline-input {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: border-color 0.3s ease;
+}
+
+.form-control.underline-input:focus {
+  border-color: #367C2B;
+  outline: none;
+}
+
+.input-lg {
+  font-size: 1rem;
+  padding: 8px 5px;
+}
+
+.small-label {
+  font-size: 0.85rem;
+  color: #367C2B;
+  font-weight: 600;
+}
+
+.date-input {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s, color 0.3s;
+  color: #333;
+  padding: 6px 0;
+}
+
+
+.date-input:focus {
+  border-color: #367C2B;
+  color: #367C2B;
+}
+
+
+.date-input::-webkit-calendar-picker-indicator {
+  filter: invert(45%) sepia(95%) saturate(400%) hue-rotate(90deg);
+  cursor: pointer;
+}
+
+
+.date-input::-moz-focus-inner {
+  border: none;
+}
