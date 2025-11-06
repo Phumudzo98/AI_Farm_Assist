@@ -19,9 +19,9 @@
   </nav>
 
   <!-- Overlay Content -->
-  <div class="dashboard-content" [class.shifted]="menuOpen">
+  <div *ngIf="farmData!=null" class="dashboard-content" [class.shifted]="menuOpen">
     <header class="dashboard-header">
-      <h1>{{ farmName }} Dashboard</h1>
+      <h1>{{ farmData.farmName }} Dashboard</h1>
       <button class="btn-add-farm" (click)="goToAddFarm()">Add New Farm</button>
     </header>
 

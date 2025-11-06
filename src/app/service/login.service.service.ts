@@ -3,20 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 
 export interface LoginResponse {
-  token: string; // matches backend JSON key "token"
+  token: string; 
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginServiceService {
-  private apiUrl = 'http://localhost:8080/api'; // backend URL
+  private apiUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 
-  // Login method
+  
   login(email: string, password: string): Observable<LoginResponse> {
-    // Remove old token first
+    
     localStorage.removeItem('token');
 
     return this.http.post<LoginResponse>(`${this.apiUrl}/auth/login`, {
@@ -27,7 +27,7 @@ export class LoginServiceService {
         console.log('Login response from backend:', response);
 
         if (response.token) {
-          // Store fresh JWT
+          
           localStorage.setItem('token', response.token.trim());
           console.log('Token saved in localStorage:', localStorage.getItem('token'));
         } else {

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { environment } from '../../service/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { log } from 'console';
 
 interface WeatherData {
   temperature: string;
@@ -26,11 +29,17 @@ export class DashboardComponent implements OnInit {
   };
 
   aiInsights: string[] = [];
+  apiUrl = environment.apiUrl;
+  farmData:any;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
   ngOnInit(): void {
     const farmId = Number(this.route.snapshot.paramMap.get('id'));
+
+    
+    this.getFarm(farmId);
+    
 
     // Dummy farm list
     const dummyFarms = [
@@ -39,8 +48,7 @@ export class DashboardComponent implements OnInit {
       { id: 3, name: 'Farm 3', image: '/assets/farm3.jpg' }
     ];
 
-    const farm = dummyFarms.find(f => f.id === farmId);
-    this.farmName = farm ? farm.name : 'Unknown Farm';
+   
 
     // Assign weather based on farm
     this.weather = this.weatherByFarm[farmId] || this.weather;
@@ -77,6 +85,25 @@ export class DashboardComponent implements OnInit {
     insights.push("Inspect crops for pests after recent weather.");
 
     return insights;
+  }
+
+  getFarm(farmId:number)
+  {
+    
+  const token = localStorage.getItem('token'); 
+
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  };
+
+    this.http.get<any>(this.apiUrl+'/farm/get-farm/'+farmId, {headers}).subscribe((data)=>
+    {
+      console.log(data);
+      this.farmData=data;
+      
+      
+    })
   }
 
   toggleMenu() {

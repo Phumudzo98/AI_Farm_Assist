@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../service/environments/environment';
 import { Router } from '@angular/router';
+import { log } from 'node:console';
 
 @Component({
   selector: 'app-select-a-farm-main',
@@ -11,42 +12,42 @@ import { Router } from '@angular/router';
 export class SelectAFarmMainComponent implements OnInit{
 
   apiUrl = environment.apiUrl;
+  farms:any= [];
 
-  constructor(private http: HttpClient, private router: Router)
-  {
-  }
-
-  
+  constructor(private http: HttpClient, private router: Router){}
 
   ngOnInit(): void {
     
-   // this.getFarms();
+    this.getFarms();
   }
 
-// getFarms() {
-//   this.http.get<any>(this.apiUrl + "/farm/get-farm").subscribe({
-//     next: (response) => {
-//       console.log("Farms received:", response);
-//       this.farms = response;
-//     },
-//     error: (err) => {
-//       console.error("Error fetching farms:", err);
-//       this.farms = []; // fallback so template renders
-//     }
-//   });
-// }
+ 
+
+  getFarms() {
+
+  const token = localStorage.getItem('token'); 
+
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  };
+
+  this.http.get<any>(this.apiUrl + "/farm/get-farms", {headers}).subscribe({
+    next: (response) => {
+      console.log("Farms received:", response);
+      this.farms = response;
+      console.log(this.farms);
+      
+    },
+    error: (err) => {
+      console.error("Error fetching farms:", err);
+     
+    }
+  });
+}
 
 
-userName = 'Phumudzo';
-
-  // Example farms (can come from API later)
-  farms = [
-    { id: 1, name: 'Farm 1', image: '/istockphoto-543212762-612x612.jpg' },
-    { id: 2, name: 'Farm 2', image: '/Crop676x507.jpg' },
-    { id: 3, name: 'Farm 3', image: '/Crop676x507.jpg' },
-    { id: 4, name: 'Farm 4', image: '/Crop676x507.jpg' },
-    { id: 5, name: 'Farm 5', image: '/Crop676x507.jpg' }
-  ];
+  userName = 'Phumudzo';
 
   search = '';
 
@@ -57,13 +58,15 @@ userName = 'Phumudzo';
 
   goToAddFarm() {
     console.log('Navigating to add farm');
-    // Example: this.router.navigate(['/add-farm']);
+
+    this.router.navigate(['/add-farm'])
+   
   }
 
   onSearch() {
   console.log('Searching for:', this.search);
-  // implement filtering logic here
-}
+  
+  }
 
 
 }

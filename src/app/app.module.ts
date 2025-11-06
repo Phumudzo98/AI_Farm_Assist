@@ -13,7 +13,6 @@ import { UpdateProfileComponent } from './update-profile/update-profile.componen
 import { AskAiComponent } from './ask-ai/ask-ai.component';
 import { WeatherDashboardComponent } from './weather-dashboard/weather-dashboard.component';
 import { AiInteractionComponent } from './pages/ai-interaction/ai-interaction.component';
-import { AuthInterceptor } from './core/auth.interceptor';
 import { CropFormComponent } from './crop-form/crop-form.component';
 import { LandFormComponent } from './land-form/land-form.component';
 import { ViewLandComponent } from './view-land/view-land.component';
@@ -56,8 +55,7 @@ import { TaskActivityComponent } from './task-activity/task-activity.component';
     HttpClientModule
   ],
   providers: [
-    provideClientHydration(),
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    
   ],
   bootstrap: [AppComponent]
 })

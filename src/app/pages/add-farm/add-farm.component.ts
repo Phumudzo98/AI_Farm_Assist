@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { environment } from '../../service/environments/environment';
+import { error } from 'console';
 
 @Component({
   selector: 'app-add-farm',
@@ -10,13 +13,14 @@ export class AddFarmComponent {
 
 farmForm!: FormGroup;
   selectedImage!: File;
+  apiUrl:any=environment.apiUrl;
   currentStep: number = 1; // 1 = Farm Details, 2 = Land Details
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.farmForm = this.fb.group({
-      farm_name: ['', Validators.required],
+      farmName: ['', Validators.required],
       farm_type: ['', Validators.required],
       farm_location: ['', Validators.required],
       farm_description: [''],
@@ -72,6 +76,23 @@ farmForm!: FormGroup;
     if (this.farmForm.valid) {
       console.log(this.farmForm.value);
       // Send data to backend
+
+      const token = localStorage.getItem('token'); 
+
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  };
+
+      this.http.post<any>(this.apiUrl+"/farm/create-farm", this.farmForm.value,{headers}).subscribe((data)=>
+      {
+        console.log(data);
+        
+      }, error=>{
+        console.log("Something went wrong");
+        
+      })
+      
     } else {
       this.farmForm.markAllAsTouched();
     }

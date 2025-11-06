@@ -27,26 +27,26 @@
     </button>
   </div>
 
-  <!-- Farm Cards -->
+  
   <div class="row justify-content-center mt-5 g-4">
-    <!-- If user has farms -->
+   
     <ng-container *ngIf="farms.length > 0; else noFarms">
       <div
         class="col-12 col-sm-6 col-md-4 col-lg-3"
         *ngFor="let farm of farms"
       >
-        <div
+        <div 
           class="card shadow-sm text-center h-100 d-flex flex-column align-items-center justify-content-center"
           style="aspect-ratio: 1 / 1; border-radius: 20px; cursor: pointer; border: 3px solid #367C2B;"
           (click)="goToFarm(farm.id)"
         >
           <img
-            [src]="farm.image"
-            [alt]="farm.name"
+            [src]=""
+            [alt]=""
             class="img-fluid rounded-circle"
             style="width: 120px; height: 120px; object-fit: cover;"
           />
-          <h5 class="mt-3">{{ farm.name }}</h5>
+          <h5 class="mt-3">{{ farm.farmName }}</h5>
         </div>
       </div>
 

@@ -7,7 +7,7 @@
     <div *ngIf="currentStep === 1">
       <h4>Farm Information</h4>
       <div class="mb-3">
-        <input type="text" formControlName="farm_name" placeholder="Farm Name" class="form-control underline-input input-lg">
+        <input type="text" formControlName="farmName" placeholder="Farm Name" class="form-control underline-input input-lg">
       </div>
       <div class="mb-3">
         <input type="text" formControlName="farm_type" placeholder="Farm Type" class="form-control underline-input input-lg">
@@ -41,40 +41,51 @@
     <div *ngIf="currentStep === 2">
       <h4>Land Details</h4>
 
-      <div formArrayName="landDetails" *ngFor="let land of landDetails.controls; let i = index" [formGroupName]="i" class="mb-3 p-3">
-        <input type="text" formControlName="sectionName" placeholder="Section Name" class="form-control underline-input input-lg mb-2">
-        <input type="text" formControlName="soilType" placeholder="Soil Type" class="form-control underline-input input-lg mb-2">
-        <div class="row g-2 mb-2">
-          <div class="col-6">
-            <input type="date" formControlName="lastPlantedDate" class="form-control underline-input input-lg">
-          </div>
-          <div class="col-6">
-            <input type="date" formControlName="lastHarvestDate" class="form-control underline-input input-lg">
-          </div>
-        </div>
-        <input type="text" formControlName="irrigationType" placeholder="Irrigation Type" class="form-control underline-input input-lg mb-2">
-        <div class="form-check mb-2">
-          <input type="checkbox" formControlName="underCultivation" class="form-check-input">
-          <label class="form-check-label">Under Cultivation</label>
-        </div>
-        <div class="row g-2 mb-2">
-          <div class="col-6">
-            <input type="text" formControlName="latitude" placeholder="Latitude" class="form-control underline-input input-lg">
-          </div>
-          <div class="col-6">
-            <input type="text" formControlName="longitude" placeholder="Longitude" class="form-control underline-input input-lg">
-          </div>
-        </div>
-        <input type="text" formControlName="notes" placeholder="Notes" class="form-control underline-input input-lg mb-2">
-        <div class="row g-2">
-          <div class="col-6">
-            <input type="number" formControlName="size" placeholder="Size" class="form-control underline-input input-lg">
-          </div>
-          <div class="col-6">
-            <input type="text" formControlName="metrics" placeholder="Metrics" class="form-control underline-input input-lg">
-          </div>
-        </div>
+     <div formArrayName="landDetails">
+  <div *ngFor="let land of landDetails.controls; let i = index" [formGroupName]="i" class="mb-3 p-3 border rounded">
+    
+    <input type="text" formControlName="sectionName" placeholder="Section Name" class="form-control mb-2">
+    <input type="text" formControlName="soilType" placeholder="Soil Type" class="form-control mb-2">
+
+    <div class="row g-2 mb-2">
+      <div class="col-6">
+        <input type="date" formControlName="lastPlantedDate" class="form-control">
       </div>
+      <div class="col-6">
+        <input type="date" formControlName="lastHarvestDate" class="form-control">
+      </div>
+    </div>
+
+    <input type="text" formControlName="irrigationType" placeholder="Irrigation Type" class="form-control mb-2">
+
+    <div class="form-check mb-2">
+      <input type="checkbox" formControlName="underCultivation" class="form-check-input">
+      <label class="form-check-label">Under Cultivation</label>
+    </div>
+
+    <div class="row g-2 mb-2">
+      <div class="col-6">
+        <input type="text" formControlName="latitude" placeholder="Latitude" class="form-control">
+      </div>
+      <div class="col-6">
+        <input type="text" formControlName="longitude" placeholder="Longitude" class="form-control">
+      </div>
+    </div>
+
+    <input type="text" formControlName="notes" placeholder="Notes" class="form-control mb-2">
+
+    <div class="row g-2">
+      <div class="col-6">
+        <input type="number" formControlName="size" placeholder="Size" class="form-control">
+      </div>
+      <div class="col-6">
+        <input type="text" formControlName="metrics" placeholder="Metrics" class="form-control">
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
       <button type="button" class="btn btn-outline-secondary mb-3" (click)="previousStep()">Previous</button>
       <button type="submit" class="btn w-100 btn-lg" style="background-color: #367C2B; color: white;">Save Farm</button>
