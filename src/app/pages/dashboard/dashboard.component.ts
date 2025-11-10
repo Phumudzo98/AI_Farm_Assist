@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../service/environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { log } from 'console';
+import { error, log } from 'console';
 
 interface WeatherData {
   temperature: string;
@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
 
     
     this.getFarm(farmId);
+    this.getFullForecast(farmId);
     
 
     // Dummy farm list
@@ -101,7 +102,25 @@ export class DashboardComponent implements OnInit {
     {
       console.log(data);
       this.farmData=data;
+    })
+  }
+
+  getFullForecast(farmId:number)
+  {
+
+    const token = localStorage.getItem('token'); 
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+    this.http.get<any>(this.apiUrl+"/weather/daily/"+farmId, {headers}).subscribe((data)=>
+    {
+      console.log(data.daily[0]);
       
+    }, error=>{
+      console.log(error);
       
     })
   }

@@ -3,25 +3,26 @@
   <p class="subtitle">Got any questions, farm-related?</p>
 
   <div class="content-row">
+    <div class="upload-box" (click)="fileInput.click()">
+      <ng-container *ngIf="previewUrl; else uploadIcon">
+        <img [src]="previewUrl" class="preview-image" alt="Uploaded Image">
+      </ng-container>
 
-<div class="upload-box" (click)="fileInput.click()">
- 
-  <ng-container *ngIf="previewUrl; else uploadIcon">
-    <img [src]="previewUrl" class="preview-image" alt="Uploaded Image">
-  </ng-container>
+      <ng-template #uploadIcon>
+        <img src="/upload.svg" class="upload-icon">
+        <p class="upload-label">Upload an image</p>
+      </ng-template>
 
-  <ng-template #uploadIcon>
-    <img src="/upload.svg" class="upload-icon">
-    <p class="upload-label">Upload an image</p>
-  </ng-template>
-
-  <input type="file" hidden #fileInput (change)="onFileSelected($event)">
-</div>
-
+      <input type="file" hidden #fileInput (change)="onFileSelected($event)">
+    </div>
 
     <div class="message-box">
       <textarea [(ngModel)]="message" placeholder="Enter a message..."></textarea>
-      <button class="send-btn" (click)="sendMessage()">Send</button>
+
+      <button class="send-btn" (click)="sendMessage()" [disabled]="loading">
+        <span *ngIf="!loading">Send</span>
+      </button>
+
       <div class="ai-response" *ngIf="aiResponse">
         {{ aiResponse }}
       </div>
@@ -31,4 +32,10 @@
   <p class="footer-text">
     I'm stumped as a fence post until you ask something.
   </p>
+
+  <!-- 🔹 Spinner overlay -->
+  <div class="loading-overlay" *ngIf="loading">
+    <div class="spinner"></div>
+    <p class="loading-text">Analyzing your request...</p>
+  </div>
 </div>
