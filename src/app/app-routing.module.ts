@@ -30,7 +30,7 @@ const routes: Routes = [
     {path: 'add-farm', component: AddFarmComponent},
     {path: 'update-profile', component: UpdateProfileComponent},
     {path: 'ask-ai', component: AskAiComponent},
-    {path: 'weather-dashboard', component: WeatherDashboardComponent},
+    {path: 'weather/:id', component: WeatherDashboardComponent},
     {path: 'crop-form/:id', component:  CropFormComponent},
     {path: 'crop-form', component:  CropFormComponent},
     {path:'land-form', component: LandFormComponent},

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../service/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { error, log } from 'console';
+
 
 interface WeatherData {
   temperature: string;
@@ -31,12 +32,13 @@ export class DashboardComponent implements OnInit {
   aiInsights: string[] = [];
   apiUrl = environment.apiUrl;
   farmData:any;
+  id:any;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     const farmId = Number(this.route.snapshot.paramMap.get('id'));
-
+    this.id=farmId;
     
     this.getFarm(farmId);
     this.getFullForecast(farmId);
@@ -132,4 +134,14 @@ export class DashboardComponent implements OnInit {
   goToAddFarm() {
     console.log('Go to Add Farm');
   }
+
+  logout()
+  {
+
+  
+  localStorage.removeItem('authToken'); 
+  this.router.navigateByUrl("/login");
+}
+
+  
 }

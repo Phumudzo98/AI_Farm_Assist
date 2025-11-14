@@ -9,12 +9,14 @@
   <nav class="side-menu" [class.open]="menuOpen">
     <div class="close-btn" (click)="toggleMenu()">×</div>
     <ul>
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">Crops</a></li>
-      <li><a href="#">Livestock</a></li>
-      <li><a href="#">Irrigation</a></li>
+      <li><a [routerLink]="['/dashboard', id]">Dashboard</a></li>
+      <li><a  [routerLink]="['/weather', id]">Weather</a></li>
+      <li><a href="#">Farm Sections</a></li>
+      <li><a [routerLink]="['/ask-ai']">Ask AI</a></li>
       <li><a href="#">Reports</a></li>
+      <li><a [routerLink]="['/select-a-farm']">Switch farm</a></li>
       <li><a href="#">Settings</a></li>
+      <li><a (click)="logout()">Logout</a></li>
     </ul>
   </nav>
 

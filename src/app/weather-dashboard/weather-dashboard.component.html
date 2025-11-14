@@ -1,20 +1,13 @@
 <div class="farm-weather">
-
-
- 
-
-
   <div class="location-card">
     <h1 class="city-name">{{ city }}</h1>
     <button class="btn-green" (click)="setFavoriteFarm()">Set as Favorite Farm</button>
-
     <div class="current-temp">
       <h2>{{ currentTemp }}°C</h2>
       <p>{{ condition }}</p>
     </div>
   </div>
 
->
   <div class="forecast-container">
     <div 
       class="forecast-card" 
@@ -27,13 +20,9 @@
     </div>
   </div>
 
-
   <div class="details-card" *ngIf="selectedDay">
     <h2>{{ selectedDay.name }} Farm Weather</h2>
-
-
     <p class="summary">{{ dailySummary }}</p>
-
     <ul>
       <li>🌱 Humidity <span>{{ selectedDay.humidity }}</span></li>
       <li>🌡️ Min Temperature <span>{{ selectedDay.min }}°C</span></li>
@@ -44,8 +33,6 @@
       <li>🌦️ Rain Probability <span>{{ selectedDay.rainProb }}</span></li>
       <li>🌅 Sunrise / Sunset <span>{{ selectedDay.sunrise }} / {{ selectedDay.sunset }}</span></li>
     </ul>
-
     <button class="btn-green full" (click)="viewDetailedForecast()">View Detailed Forecast</button>
   </div>
-
 </div>

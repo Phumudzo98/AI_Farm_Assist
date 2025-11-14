@@ -1,55 +1,141 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from '../service/environments/environment.prod';
 
 @Component({
   selector: 'app-weather-dashboard',
   templateUrl: './weather-dashboard.component.html',
-  styleUrl: './weather-dashboard.component.scss'
+  styleUrls: ['./weather-dashboard.component.scss']
 })
 export class WeatherDashboardComponent {
   city: string = 'Nkandla';
-  currentTemp: number = 26;
-  condition: string = 'Mostly Clear';
-
+  currentTemp: number = 0;
+  condition: string = '';
+  farmData: any;
   weekForecast: any[] = [];
   selectedDay: any = null;
   dailySummary: string = '';
+  apiUrl: any = environment.apiUrl;
+
+  constructor(
+    private route: ActivatedRoute,
+    private http: HttpClient
+  ) {}
 
   ngOnInit(): void {
-    this.loadForecast();
-    this.selectDay(this.weekForecast[0]); 
+    const farmId = Number(this.route.snapshot.paramMap.get('id'));
+    this.getFullForecast(farmId);
+    this.getFarm(farmId);
+
   }
 
-  loadForecast() {
-    this.weekForecast = [
-      { name: 'Today', icon: '☁️', max: 29, min: 13, humidity: '35%', condition: 'Mostly Clear', wind: 'ENE - 5.0 kt', rain: '0 mm', rainProb: '0%', sunrise: '06:11', sunset: '17:58' },
-      { name: 'Tuesday', icon: '☀️', max: 29, min: 15, humidity: '30%', condition: 'Sunny', wind: 'E - 6.0 kt', rain: '0 mm', rainProb: '0%', sunrise: '06:12', sunset: '17:59' },
-      { name: 'Wednesday', icon: '☀️', max: 28, min: 14, humidity: '32%', condition: 'Sunny', wind: 'NE - 4.5 kt', rain: '0 mm', rainProb: '5%', sunrise: '06:12', sunset: '18:00' },
-      { name: 'Thursday', icon: '☀️', max: 31, min: 17, humidity: '40%', condition: 'Hot & Sunny', wind: 'E - 5.0 kt', rain: '0 mm', rainProb: '10%', sunrise: '06:13', sunset: '18:01' },
-      { name: 'Friday', icon: '🌧️', max: 27, min: 13, humidity: '65%', condition: 'Light Rain', wind: 'SE - 7.0 kt', rain: '2 mm', rainProb: '60%', sunrise: '06:14', sunset: '18:02' },
-      { name: 'Saturday', icon: '🌧️', max: 27, min: 13, humidity: '70%', condition: 'Rainy', wind: 'S - 8.0 kt', rain: '4 mm', rainProb: '80%', sunrise: '06:15', sunset: '18:03' },
-      { name: 'Sunday', icon: '🌧️', max: 27, min: 13, humidity: '68%', condition: 'Rainy', wind: 'SW - 6.0 kt', rain: '3 mm', rainProb: '75%', sunrise: '06:15', sunset: '18:04' }
-    ];
+  
+  getFullForecast(farmId: number) {
+    const token = localStorage.getItem('token');
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+    this.http.get<any>(`${this.apiUrl}/weather/daily/${farmId}`, { headers })
+      .subscribe({
+        next: (data) => {
+          
+          this.weekForecast = data.daily.map((day: any, index: number) => ({
+            name: index === 0
+              ? 'Today'
+              : new Date(day.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' }),
+            icon: this.getWeatherIcon(day.weather[0].main),
+            max: Math.round(day.temp.max),
+            min: Math.round(day.temp.min),
+            humidity: `${day.humidity}%`,
+            condition: day.weather[0].description,
+            wind: `${day.wind_deg}° - ${day.wind_speed.toFixed(1)} m/s`,
+            rain: day.rain ? `${day.rain} mm` : '0 mm',
+            rainProb: `${Math.round(day.pop * 100)}%`,
+            sunrise: new Date(day.sunrise * 1000).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit'
+            }),
+            sunset: new Date(day.sunset * 1000).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit'
+            })
+          }));
+
+         
+          if (this.weekForecast.length > 0) {
+            this.currentTemp = this.weekForecast[0].max;
+            this.condition = this.weekForecast[0].condition;
+            this.selectDay(this.weekForecast[0]);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching forecast:', err);
+        }
+      });
   }
 
-  setFavoriteFarm() {
-    alert(`${this.city} set as favorite farm location`);
+  
+  getFarm(farmId: number) {
+    const token = localStorage.getItem('token');
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+    this.http.get<any>(`${this.apiUrl}/farm/get-farm/${farmId}`, { headers })
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          this.farmData = data;
+
+          this.city=data.city;
+        },
+        error: (error) => {
+          console.error('Error fetching farm data:', error);
+        }
+      });
   }
 
-  viewDetailedForecast() {
-    alert(`Viewing detailed forecast for ${this.selectedDay.name}`);
-  }
-
-
+  
   selectDay(day: any) {
     this.selectedDay = day;
     this.generateSummary(day);
   }
 
- 
+  
   generateSummary(day: any) {
     this.dailySummary =
       `${day.name} will be ${day.condition.toLowerCase()} with a high of ${day.max}°C `
       + `and a low of ${day.min}°C. Humidity around ${day.humidity}, `
       + `${day.rainProb === '0%' ? 'no rain expected' : `chance of rain at ${day.rainProb}`}.`;
+  }
+
+  
+  getWeatherIcon(main: string): string {
+    switch (main.toLowerCase()) {
+      case 'clear': return '☀️';
+      case 'clouds': return '☁️';
+      case 'rain': return '🌧️';
+      case 'snow': return '❄️';
+      case 'thunderstorm': return '⛈️';
+      default: return '🌡️';
+    }
+  }
+
+  
+  setFavoriteFarm() {
+    alert(`${this.city} set as favorite farm location`);
+  }
+
+  
+  viewDetailedForecast() {
+    if (this.selectedDay) {
+      alert(`Viewing detailed forecast for ${this.selectedDay.name}`);
+    }
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginServiceService } from '../../service/login.service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -26,31 +27,60 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onLogin() {
-    if (this.loginForm.invalid) {
-      this.loginForm.markAllAsTouched();
-      return;
-    }
 
-    this.isLoading = true;
-    this.errorMessage = '';
+onLogin() {
+  if (this.loginForm.invalid) {
+    this.loginForm.markAllAsTouched();
 
-    const { email, password } = this.loginForm.value;
-
-    this.loginService.login(email, password).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.router.navigate(['/select-a-farm']);
-      },
-      error: (err) => {
-        this.isLoading = false;
-        console.error(err);
-        this.errorMessage = 'Invalid email or password';
-      }
+  
+    Swal.fire({
+      icon: 'warning',
+      title: 'Invalid Form',
+      text: 'Please enter both email and password.',
+      confirmButtonText: 'OK'
     });
+    return;
   }
 
-  // Optional helper methods for form validation in template
+  this.isLoading = true;
+
+  const { email, password } = this.loginForm.value;
+
+  this.loginService.login(email, password).subscribe({
+    next: () => {
+      this.isLoading = false;
+
+    Swal.fire({
+  icon: 'success',
+  title: 'Login Successful!',
+  text: 'Welcome back!',
+  timer: 2000,
+  timerProgressBar: true,
+  showConfirmButton: false,
+  willClose: () => {
+    // optional: do something just before it closes
+  }
+}).then(() => {
+  // Navigate after the alert is fully closed
+  this.router.navigate(['/select-a-farm']);
+});
+
+    },
+    error: (err) => {
+      this.isLoading = false;
+      console.error(err);
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: 'Invalid email or password',
+        confirmButtonText: 'OK'
+      });
+    }
+  });
+}
+
+  
   get email() { return this.loginForm.get('email'); }
   get password() { return this.loginForm.get('password'); }
 }
