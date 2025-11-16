@@ -52,7 +52,7 @@ import { TaskActivityComponent } from './task-activity/task-activity.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     

@@ -9,7 +9,9 @@ import Swal from 'sweetalert2';
   selector: 'app-add-farm',
   templateUrl: './add-farm.component.html',
   styleUrl: './add-farm.component.scss'
-})export class AddFarmComponent {
+})
+
+export class AddFarmComponent {
   farmForm!: FormGroup;
   selectedImage!: File;
   apiUrl = environment.apiUrl;
