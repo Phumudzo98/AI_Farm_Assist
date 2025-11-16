@@ -67,7 +67,7 @@ onRegister() {
   } else {
     this.registerForm.markAllAsTouched();
 
-    // Optional: show alert if form is invalid
+    
     Swal.fire({
       icon: 'warning',
       title: 'Invalid Form',

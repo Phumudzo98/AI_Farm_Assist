@@ -1,5 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../service/environments/environment';
+import { log } from 'console';
 
 @Component({
   selector: 'app-land-list',
@@ -8,10 +11,32 @@ import { Router } from '@angular/router';
 })
 export class LandListComponent implements OnInit {
   lands: any[] = [];
-
-  constructor(private router: Router) {}
+  apiUrl:any=environment.apiUrl;
+  farmId:any;
+  
+  constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+
+
+    const token = localStorage.getItem('token'); 
+    this.farmId = this.route.snapshot.paramMap.get('id');
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+    this.http.get<any>(this.apiUrl+"/farm/get-farm-landList/"+this.farmId, {headers}).subscribe((data)=>
+    {
+      console.log(data);
+      
+    }, error=>
+    {
+      console.log(error);
+      
+    })
+
  
     this.lands = [
       {
