@@ -13,6 +13,8 @@ export class LandListComponent implements OnInit {
   lands: any[] = [];
   apiUrl:any=environment.apiUrl;
   farmId:any;
+
+  land:any;
   
   constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute) {}
 
@@ -30,6 +32,7 @@ export class LandListComponent implements OnInit {
     this.http.get<any>(this.apiUrl+"/farm/get-farm-landList/"+this.farmId, {headers}).subscribe((data)=>
     {
       console.log(data);
+      this.land=data;
       
     }, error=>
     {

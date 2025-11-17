@@ -10,7 +10,7 @@
 
     <div *ngIf="lands.length > 0; else noLands">
       <div class="row g-3">
-        <div class="col-md-6" *ngFor="let land of lands">
+        <div class="col-md-6" *ngFor="let land of land">
           <div class="land-card p-3">
             <h5 style="color: #367C2B;">{{ land.sectionName }}</h5>
             <p><strong>Soil Type:</strong> {{ land.soilType }}</p>
