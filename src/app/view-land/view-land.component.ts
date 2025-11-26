@@ -13,6 +13,7 @@ export class ViewLandComponent implements OnInit {
   land: any;
   apiUrl:any=environment.apiUrl;
   landId:any;
+  farmId:any;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {}
 
@@ -30,6 +31,8 @@ export class ViewLandComponent implements OnInit {
 
 
     const landIdParam = this.route.snapshot.paramMap.get('id');
+    this.farmId=this.route.snapshot.paramMap.get('farmId');
+    
     const landId = landIdParam ? +landIdParam : null; 
     this.landId=landId
     if (!landId) {
@@ -67,7 +70,7 @@ export class ViewLandComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/land-list', this.landId]);
+    this.router.navigate(['/land-list', this.farmId]);
   }
 
   viewSoilInfo(): void {

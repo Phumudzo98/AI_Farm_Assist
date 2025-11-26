@@ -1,6 +1,13 @@
 <div class="vh-100 d-flex align-items-center justify-content-center" style="background-color: #eaf6ec;">
   <div class="container w-75 p-4 land-list-card">
 
+     <button 
+      class="btn mb-3"
+      style="background-color: #367C2B; color: white; border-radius: 10px;"
+      [routerLink]="['/dashboard', farmId]">
+      ← Back to Dashboard
+    </button>
+
     <div class="d-flex justify-content-between align-items-center mb-4">
       <h2 style="color: #367C2B;">🌾 Land List</h2>
       <button class="btn btn-success" style="background-color: #367C2B; border-radius: 10px;" [routerLink]="['/land-form', farmId]">

@@ -36,7 +36,7 @@ const routes: Routes = [
     {path: 'crop-form', component:  CropFormComponent},
     {path:'land-form/:id', component: LandFormComponent},
     {path:'view-land', component: ViewLandComponent},
-    { path: 'view-land/:id', component: ViewLandComponent },
+    { path: 'view-land/:id/:farmId', component: ViewLandComponent },
     {path:'land-list/:id', component: LandListComponent },
      {path:'view-crop/:landId/:cropId', component:ViewCropComponent },
       {path:'view-crop/:cropId', component:ViewCropComponent },

@@ -13,11 +13,7 @@ export class CropListComponent implements OnInit{
   cropList:any;
   apiUrl:any=environment.apiUrl;
   crops:any;
-  // crops = [
-  //   { id: 1, name: 'Maize', type: 'Cereal', plantedDate: '2025-09-01' },
-  //   { id: 2, name: 'Wheat', type: 'Cereal', plantedDate: '2025-07-15' },
-  //   { id: 3, name: 'Tomatoes', type: 'Vegetable', plantedDate: '2025-08-20' }
-  // ];
+ 
 
   constructor(private router: Router, private http: HttpClient, private route: ActivatedRoute) {}
   ngOnInit(): void {

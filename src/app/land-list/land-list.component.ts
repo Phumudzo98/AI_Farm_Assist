@@ -44,7 +44,7 @@ export class LandListComponent implements OnInit {
   }
 
  viewLand(landId: number) {
-  this.router.navigate(['/view-land', landId]);
+  this.router.navigate(['/view-land', landId, this.farmId]);
 }
 
 
