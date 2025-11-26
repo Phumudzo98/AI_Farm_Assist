@@ -3,34 +3,93 @@
 
   <h2 class="mb-4 page-title">Soil Information</h2>
 
-  <div *ngIf="soil" class="soil-card p-4">
-    <div class="info-row">
-      <span class="label">Soil Type:</span>
-      <span class="value">{{ soil.soilType }}</span>
+  <!-- Show soil info if exists -->
+  <ng-container *ngIf="soil">
+    <div class="soil-card p-4">
+      <div class="info-row">
+        <span class="label">Soil Type:</span>
+        <span class="value">{{ soil.soilType }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">pH Level:</span>
+        <span class="value">{{ soil.phLevel }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Moisture Level:</span>
+        <span class="value">{{ soil.moistureLevel }}%</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Nitrogen:</span>
+        <span class="value">{{ soil.nitrogen }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Phosphorus:</span>
+        <span class="value">{{ soil.phosphorus }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Potassium:</span>
+        <span class="value">{{ soil.potassium }}</span>
+      </div>
+      <div class="info-row">
+        <span class="label">Last Tested:</span>
+        <span class="value">{{ soil.lastTestedDate | date }}</span>
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" (click)="editSoil()">Edit</button>
+        <button class="btn btn-danger" (click)="deleteSoil()">Delete</button>
+      </div>
     </div>
-    <div class="info-row">
-      <span class="label">pH Level:</span>
-      <span class="value">{{ soil.phLevel }}</span>
+  </ng-container>
+
+ 
+  <ng-container *ngIf="!soil">
+    <p>No soil information available for this land.</p>
+    <button class="btn btn-success" (click)="addSoil()">+ Add Soil Information</button>
+  </ng-container>
+
+
+  <ng-container *ngIf="showModal">
+    <div class="modal show">
+      <div class="modal-content p-4">
+        <h4>{{ isEditMode ? 'Edit Soil Information' : 'Add Soil Information' }}</h4>
+
+        <form #soilForm="ngForm" (ngSubmit)="saveSoil()">
+          <div class="form-group mb-3">
+            <label>Soil Type</label>
+            <input type="text" class="form-control" [(ngModel)]="soilFormData.soilType" name="soilType" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>pH Level</label>
+            <input type="number" step="0.1" class="form-control" [(ngModel)]="soilFormData.phLevel" name="phLevel" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Moisture Level (%)</label>
+            <input type="number" class="form-control" [(ngModel)]="soilFormData.moistureLevel" name="moistureLevel" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Nitrogen</label>
+            <input type="number" class="form-control" [(ngModel)]="soilFormData.nitrogen" name="nitrogen" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Phosphorus</label>
+            <input type="number" class="form-control" [(ngModel)]="soilFormData.phosphorus" name="phosphorus" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Potassium</label>
+            <input type="number" class="form-control" [(ngModel)]="soilFormData.potassium" name="potassium" required>
+          </div>
+          <div class="form-group mb-3">
+            <label>Last Tested Date</label>
+            <input type="date" class="form-control" [(ngModel)]="soilFormData.lastTestedDate" name="lastTestedDate" required>
+          </div>
+
+          <div class="modal-actions">
+            <button type="submit" class="btn btn-success">{{ isEditMode ? 'Update' : 'Save' }}</button>
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+          </div>
+        </form>
+      </div>
     </div>
-    <div class="info-row">
-      <span class="label">Moisture Level:</span>
-      <span class="value">{{ soil.moistureLevel }}%</span>
-    </div>
-    <div class="info-row">
-      <span class="label">Nitrogen:</span>
-      <span class="value">{{ soil.nitrogen }}</span>
-    </div>
-    <div class="info-row">
-      <span class="label">Phosphorus:</span>
-      <span class="value">{{ soil.phosphorus }}</span>
-    </div>
-    <div class="info-row">
-      <span class="label">Potassium:</span>
-      <span class="value">{{ soil.potassium }}</span>
-    </div>
-    <div class="info-row">
-      <span class="label">Last Tested:</span>
-      <span class="value">{{ soil.lastTestedDate | date }}</span>
-    </div>
-  </div>
+  </ng-container>
 </div>

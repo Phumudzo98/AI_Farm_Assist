@@ -35,19 +35,19 @@ const routes: Routes = [
     { path: 'crop-form/:landId', component: CropFormComponent },  
     { path: 'crop-form/:landId/edit/:cropId', component: CropFormComponent } , 
     {path: 'crop-form', component:  CropFormComponent},
-    {path:'land-form/:id', component: LandFormComponent},
+    {path:'land-form', component: LandFormComponent},
     {path:'view-land', component: ViewLandComponent},
     { path: 'view-land/:id/:farmId', component: ViewLandComponent },
-    {path:'land-list/:id', component: LandListComponent },
+    {path:'land-list', component: LandListComponent },
      {path:'view-crop/:landId/:cropId', component:ViewCropComponent },
       {path:'view-crop/:cropId', component:ViewCropComponent },
     {path:'crop-list/:id', component: CropListComponent  },
-  { path: 'pest-disease/:cropId', component: PestDiseaseComponent }, // create
-{ path: 'pest-disease/:cropId/edit/:id', component: PestDiseaseComponent }, // edit
+  { path: 'pest-disease/:cropId', component: PestDiseaseComponent }, 
+{ path: 'pest-disease/:cropId/edit/:id', component: PestDiseaseComponent },
     {path:'pest-disease-list', component: PestDiseaseListComponent },
     {path:'pest-disease-list/:cropId', component: PestDiseaseListComponent },
-    { path: 'soil-info/:id', component: SoilInfoComponent },
-   { path: 'task-activity', component: TaskActivityComponent },
+    { path: 'soil-info', component: SoilInfoComponent },
+   { path: 'task-activity/:id', component: TaskActivityComponent },
     { path: 'add-edit-task', component: AddEditTaskComponent},
 ];
 

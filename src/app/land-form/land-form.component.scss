@@ -105,10 +105,11 @@
 }
 
 
-.date-input::-webkit-calendar-picker-indicator {
-  filter: invert(45%) sepia(95%) saturate(400%) hue-rotate(90deg);
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(36%) sepia(30%) saturate(800%) hue-rotate(75deg) brightness(90%) contrast(90%);
   cursor: pointer;
 }
+
 
 
 .date-input::-moz-focus-inner {
