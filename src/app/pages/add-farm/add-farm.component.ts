@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { environment } from '../../service/environments/environment';
 import { error } from 'console';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-farm',
@@ -17,9 +18,9 @@ export class AddFarmComponent {
   apiUrl = environment.apiUrl;
   currentStep: number = 1;
 
-  uploadedFarm: any; // Store response for preview
+  uploadedFarm: any; 
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.farmForm = this.fb.group({
@@ -103,7 +104,7 @@ export class AddFarmComponent {
           console.log('Farm created successfully', response);
           this.uploadedFarm = response;
 
-          // ✅ SweetAlert2 success popup
+         
           Swal.fire({
             icon: 'success',
             title: 'Farm Created!',
@@ -112,6 +113,9 @@ export class AddFarmComponent {
             timerProgressBar: true,
             showConfirmButton: false
           });
+
+          this.router.navigate(['/select-a-farm']);
+
         },
         (error) => {
           console.error('Error creating farm', error);

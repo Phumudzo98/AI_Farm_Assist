@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../service/environments/environment';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ import Swal from 'sweetalert2';
  
   apiUrl = environment.apiUrl
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {}
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group({
@@ -54,6 +55,8 @@ onRegister() {
           timerProgressBar: true,
           showConfirmButton: false
         });
+
+        this.router.navigate(['/login']);
       },
       error: (err) => {
         Swal.fire({
