@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-soil-info',
@@ -72,62 +74,76 @@ import { ActivatedRoute, Router } from '@angular/router';
   }
 
   deleteSoil(): void {
-    if (!this.soil?.id) {
-      alert("No soil record to delete.");
-      return;
-    }
+  if (!this.soil?.id) {
+    Swal.fire('No soil record to delete.');
+    return;
+  }
 
-     const token = localStorage.getItem('token');
-    const headers = { 'Authorization': `Bearer ${token}` };
+  Swal.fire({
+    title: 'Are you sure?',
+    text: 'Do you want to delete this soil information?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'Cancel'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const token = localStorage.getItem('token');
+      const headers = { 'Authorization': `Bearer ${token}` };
 
-    if (confirm('Are you sure you want to delete this soil information?')) {
       this.http.delete(`${this.apiUrl}/${this.soil.id}`, { headers })
         .subscribe({
           next: () => {
             this.soil = null;
-            alert("Soil deleted.");
+            Swal.fire('Deleted!', 'Soil information has been deleted.', 'success');
           },
-          error: (err) => console.error("Delete failed:", err)
+          error: (err) => {
+            console.error("Delete failed:", err);
+            Swal.fire('Error!', 'Failed to delete soil.', 'error');
+          }
         });
     }
+  });
+}
+
+saveSoil(): void {
+  if (!this.soilFormData.soilType) {
+    Swal.fire('Validation', 'Soil Type is required', 'warning');
+    return;
   }
 
-  saveSoil(): void {
-    if (!this.soilFormData.soilType) {
-      alert('Soil Type is required');
-      return;
-    }
+  const token = localStorage.getItem('token');
+  const headers = { 'Authorization': `Bearer ${token}` };
 
-    if (this.isEditMode) {
-       const token = localStorage.getItem('token');
-    const headers = { 'Authorization': `Bearer ${token}` };
-      
-      this.http.put(`${this.apiUrl}/${this.soil.id}`, this.soilFormData, { headers })
-        .subscribe({
-          next: (updated) => {
-            this.soil = updated;
-            this.showModal = false;
-            alert("Soil updated.");
-          },
-          error: (err) => console.error("Update failed:", err)
-        });
-
-    } else {
-
-       const token = localStorage.getItem('token');
-    const headers = { 'Authorization': `Bearer ${token}` };
-      
-      this.http.post(`${this.apiUrl}/${this.landId}`, this.soilFormData, { headers })
-        .subscribe({
-          next: (created) => {
-            this.soil = created;
-            this.showModal = false;
-            alert("Soil added.");
-          },
-          error: (err) => console.error("Create failed:", err)
-        });
-    }
+  if (this.isEditMode) {
+    this.http.put(`${this.apiUrl}/${this.soil.id}`, this.soilFormData, { headers })
+      .subscribe({
+        next: (updated) => {
+          this.soil = updated;
+          this.showModal = false;
+          Swal.fire('Updated!', 'Soil information has been updated.', 'success');
+        },
+        error: (err) => {
+          console.error("Update failed:", err);
+          Swal.fire('Error!', 'Failed to update soil.', 'error');
+        }
+      });
+  } else {
+    this.http.post(`${this.apiUrl}/${this.landId}`, this.soilFormData, { headers })
+      .subscribe({
+        next: (created) => {
+          this.soil = created;
+          this.showModal = false;
+          Swal.fire('Added!', 'Soil information has been added.', 'success');
+        },
+        error: (err) => {
+          console.error("Create failed:", err);
+          Swal.fire('Error!', 'Failed to add soil.', 'error');
+        }
+      });
   }
+}
+
 
   closeModal(): void {
     this.showModal = false;
