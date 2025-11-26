@@ -59,6 +59,11 @@ goToAddCrop() {
   this.router.navigate(['/crop-form', this.landId, 'edit', id]);
 }
 
+goBack() {
+  this.router.navigate(['/view-land', this.landId]);
+}
+
+
 
 
 

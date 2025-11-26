@@ -29,7 +29,7 @@
         
        <td class="center-btn">
   <button class="btn btn-outline-primary btn-sm no-border-btn"
-          [routerLink]="['/add-edit-task']"
+        [routerLink]="['/add-edit-task', landId, 'edit', task.id]"
           [state]="{ task: task }">
     Edit
   </button>
@@ -39,7 +39,7 @@
     </tbody>
   </table>
 
-  <button class="btn btn-success mb-3" [routerLink]="['/add-edit-task']">
+  <button class="btn btn-success mb-3" [routerLink]="['/add-edit-task', landId]">
     + Add Task
   </button>
 </div>

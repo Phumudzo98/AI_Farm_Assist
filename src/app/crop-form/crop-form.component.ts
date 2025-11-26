@@ -3,12 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../service/environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crop-form',
   templateUrl: './crop-form.component.html',
   styleUrls: ['./crop-form.component.scss']
 })
+
+
 export class CropFormComponent implements OnInit {
   cropForm!: FormGroup;
   lands: any[] = [];
@@ -76,37 +79,72 @@ export class CropFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.cropForm.invalid) return;
+  if (this.cropForm.invalid) return;
 
-    const token = localStorage.getItem('token');
-    const payload = this.cropForm.value;
+  const token = localStorage.getItem('token');
+  const payload = this.cropForm.value;
 
-    const headers = {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    };
+  const headers = {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  };
 
-    if (this.isEditMode) {
-      
-      this.http.put(
-        `${this.apiUrl}/crop/update/${this.cropId}?landId=${this.landId}`, 
-        payload,
-        { headers }
-      ).subscribe(() => {
-        alert("Crop updated successfully!");
+  if (this.isEditMode) {
+
+    this.http.put(
+      `${this.apiUrl}/crop/update/${this.cropId}?landId=${this.landId}`,
+      payload,
+      { headers }
+    ).subscribe(
+      () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Crop Updated!',
+          text: 'The crop has been updated successfully.',
+          timer: 2000,
+          showConfirmButton: false
+        });
+
         this.router.navigate(['/crop-list', this.landId]);
-      });
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Update Failed',
+          text: 'Could not update crop. Please try again.',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
 
-    } else {
-      
-      this.http.post(
-        `${this.apiUrl}/crop/add-crop/${this.landId}`, 
-        payload, 
-        { headers }
-      ).subscribe(() => {
-        alert("Crop added successfully!");
+  } else {
+
+    this.http.post(
+      `${this.apiUrl}/crop/add-crop/${this.landId}`,
+      payload,
+      { headers }
+    ).subscribe(
+      () => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Crop Added!',
+          text: 'A new crop has been added successfully.',
+          timer: 2000,
+          showConfirmButton: false
+        });
+
         this.router.navigate(['/crop-list', this.landId]);
-      });
-    }
+      },
+      (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Creation Failed',
+          text: 'Could not add crop. Please try again.',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
   }
+}
+
 }

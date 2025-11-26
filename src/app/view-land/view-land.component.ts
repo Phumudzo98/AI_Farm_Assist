@@ -79,8 +79,8 @@ export class ViewLandComponent implements OnInit {
   }
 
   viewTaskActivity(): void {
-    if (!this.land?.id) return;
-    this.router.navigate(['/task-activity', this.land.id]);
+   
+    this.router.navigate(['/task-activity', this.landId]);
   }
 
   viewCrop():void

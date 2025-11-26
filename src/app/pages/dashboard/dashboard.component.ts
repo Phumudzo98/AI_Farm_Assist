@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
     this.getFullForecast(farmId);
   }
 
-  // --- API calls ---------------------------------------------------------
+  
   getFarm(farmId: number) {
     const token = localStorage.getItem('token');
     const headers = { 'Authorization': `Bearer ${token}` };

@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SelectAFarmMainComponent } from './pages/select-a-farm-main/select-a-farm-main.component';
 import { RegisterComponent } from './pages/register/register.component';
-import path from 'path';
 import { LoginComponent } from './pages/login/login.component';
 import { AddFarmComponent } from './pages/add-farm/add-farm.component';
 import { UpdateProfileComponent } from './update-profile/update-profile.component';
@@ -32,23 +31,25 @@ const routes: Routes = [
     {path: 'update-profile', component: UpdateProfileComponent},
     {path: 'ask-ai', component: AskAiComponent},
     {path: 'weather/:id', component: WeatherDashboardComponent},
-    { path: 'crop-form/:landId', component: CropFormComponent },  
-    { path: 'crop-form/:landId/edit/:cropId', component: CropFormComponent } , 
+    {path: 'crop-form/:landId', component: CropFormComponent },  
+    {path: 'crop-form/:landId/edit/:cropId', component: CropFormComponent } , 
     {path: 'crop-form', component:  CropFormComponent},
     {path:'land-form', component: LandFormComponent},
-    {path:'view-land', component: ViewLandComponent},
-    { path: 'view-land/:id/:farmId', component: ViewLandComponent },
-    {path:'land-list', component: LandListComponent },
-     {path:'view-crop/:landId/:cropId', component:ViewCropComponent },
-      {path:'view-crop/:cropId', component:ViewCropComponent },
+    {path:'view-land/:id', component: ViewLandComponent},
+    {path: 'view-land/:id/:farmId', component: ViewLandComponent },
+    {path:'land-list/:id', component: LandListComponent },
+    {path:'view-crop/:landId/:cropId', component:ViewCropComponent },
+    {path:'view-crop/:cropId', component:ViewCropComponent },
     {path:'crop-list/:id', component: CropListComponent  },
     {path: 'pest-disease/:cropId', component: PestDiseaseComponent }, 
     {path: 'pest-disease/:cropId/edit/:id', component: PestDiseaseComponent }, 
     {path:'pest-disease-list', component: PestDiseaseListComponent },
     {path:'pest-disease-list/:cropId', component: PestDiseaseListComponent },
-    { path: 'soil-info', component: SoilInfoComponent },
-   { path: 'task-activity/:id', component: TaskActivityComponent },
-    { path: 'add-edit-task', component: AddEditTaskComponent},
+    {path: 'soil-info/:landId', component: SoilInfoComponent },
+    {path: 'task-activity/:id', component: TaskActivityComponent },
+    { path: 'add-edit-task/:landId', component: AddEditTaskComponent },
+    { path: 'add-edit-task/:landId/edit/:id', component: AddEditTaskComponent },
+
 ];
 
 @NgModule({

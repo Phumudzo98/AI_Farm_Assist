@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -5,38 +6,50 @@ import { ActivatedRoute, Router } from '@angular/router';
   selector: 'app-soil-info',
   templateUrl: './soil-info.component.html',
   styleUrls: ['./soil-info.component.scss']
-})
-export class SoilInfoComponent implements OnInit {
-  soil: any;
 
+
+
+
+  
+})export class SoilInfoComponent implements OnInit {
+
+  soil: any;
   showModal: boolean = false;
   isEditMode: boolean = false;
   soilFormData: any = {};
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  apiUrl = 'http://localhost:8080/api/soil';
+  landId: any;
+
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
-    const landId = this.route.snapshot.paramMap.get('id');
-    console.log('Viewing soil info for land ID:', landId);
+    this.landId = this.route.snapshot.paramMap.get('landId');
 
+    console.log('Viewing soil info for land ID:', this.landId);
 
-    this.soil = {
-      soilType: 'Loamy',
-      phLevel: 6.5,
-      moistureLevel: 35,
-      nitrogen: 12,
-      phosphorus: 8,
-      potassium: 15,
-      lastTestedDate: '2025-10-15'
-    };
+    
+    this.loadSoil();
+  }
+
+  loadSoil() {
+
+     const token = localStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}` };
+
+    this.http.get<any[]>(`${this.apiUrl}/by-land/${this.landId}`, { headers })
+      .subscribe({
+        next: (data) => {
+          this.soil = data.length > 0 ? data[0] : null;
+        },
+        error: (err) => console.error("Failed loading soil:", err)
+      });
   }
 
   goBack(): void {
-    const landId = this.route.snapshot.paramMap.get('id');
-    this.router.navigate(['/view-land', landId]);
+    this.router.navigate(['/view-land', this.landId]);
   }
 
-  // Open modal for adding new soil info
   addSoil(): void {
     this.isEditMode = false;
     this.soilFormData = {
@@ -51,7 +64,6 @@ export class SoilInfoComponent implements OnInit {
     this.showModal = true;
   }
 
-
   editSoil(): void {
     if (!this.soil) return;
     this.isEditMode = true;
@@ -59,25 +71,64 @@ export class SoilInfoComponent implements OnInit {
     this.showModal = true;
   }
 
- 
   deleteSoil(): void {
+    if (!this.soil?.id) {
+      alert("No soil record to delete.");
+      return;
+    }
+
+     const token = localStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}` };
+
     if (confirm('Are you sure you want to delete this soil information?')) {
-      this.soil = null;
+      this.http.delete(`${this.apiUrl}/${this.soil.id}`, { headers })
+        .subscribe({
+          next: () => {
+            this.soil = null;
+            alert("Soil deleted.");
+          },
+          error: (err) => console.error("Delete failed:", err)
+        });
     }
   }
 
   saveSoil(): void {
- 
     if (!this.soilFormData.soilType) {
       alert('Soil Type is required');
       return;
     }
 
-    this.soil = { ...this.soilFormData };
-    this.showModal = false;
+    if (this.isEditMode) {
+       const token = localStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}` };
+      
+      this.http.put(`${this.apiUrl}/${this.soil.id}`, this.soilFormData, { headers })
+        .subscribe({
+          next: (updated) => {
+            this.soil = updated;
+            this.showModal = false;
+            alert("Soil updated.");
+          },
+          error: (err) => console.error("Update failed:", err)
+        });
+
+    } else {
+
+       const token = localStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}` };
+      
+      this.http.post(`${this.apiUrl}/${this.landId}`, this.soilFormData, { headers })
+        .subscribe({
+          next: (created) => {
+            this.soil = created;
+            this.showModal = false;
+            alert("Soil added.");
+          },
+          error: (err) => console.error("Create failed:", err)
+        });
+    }
   }
 
- 
   closeModal(): void {
     this.showModal = false;
   }

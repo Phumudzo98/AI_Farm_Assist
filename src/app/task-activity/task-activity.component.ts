@@ -19,6 +19,7 @@ export class TaskActivityComponent implements OnInit {
   ngOnInit(): void {
  
     this.landId = this.route.snapshot.paramMap.get('id');
+
     console.log('Viewing tasks for land ID:', this.landId);
 
     const token = localStorage.getItem('token'); 
@@ -32,6 +33,7 @@ export class TaskActivityComponent implements OnInit {
     this.http.get<any>(this.apiUrl+"/task-activity/by-land/"+this.landId, {headers}).subscribe((data)=>
     {
       console.log(data);
+      this.tasks=data
       
     }, error=>
     {
@@ -39,11 +41,7 @@ export class TaskActivityComponent implements OnInit {
       
     })
   
-    this.tasks = [
-      { taskName: 'Irrigation', description: 'Water crops in Plot A', taskDate: '2025-09-10', status: 'Completed', assignedTo: 'Worker 1' },
-      { taskName: 'Fertilizer Application', description: 'Apply NPK fertilizer', taskDate: '2025-09-12', status: 'Pending', assignedTo: 'Worker 2' },
-      { taskName: 'Weeding', description: 'Remove weeds', taskDate: '2025-09-15', status: 'In Progress', assignedTo: 'Worker 3' }
-    ];
+    
   }
 
   goBack(): void {

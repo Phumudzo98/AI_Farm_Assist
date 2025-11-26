@@ -116,7 +116,7 @@ export class AddFarmComponent {
         (error) => {
           console.error('Error creating farm', error);
 
-          // ✅ SweetAlert2 error popup
+         
           Swal.fire({
             icon: 'error',
             title: 'Creation Failed',
