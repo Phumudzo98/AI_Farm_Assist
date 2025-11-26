@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../service/environments/environment';
 import { log } from 'console';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-land-list',
@@ -48,8 +49,51 @@ export class LandListComponent implements OnInit {
 
 
   deleteLand(id: number): void {
-    if (confirm('Are you sure you want to delete this land?')) {
-      this.lands = this.lands.filter(l => l.id !== id);
-    }
+
+
+    const token = localStorage.getItem('token'); 
+    
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This land will be permanently deleted.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it',
+      cancelButtonText: 'Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.http.delete(`${this.apiUrl}/farm/delete-land/${id}`, {headers}).subscribe({
+          next: () => {
+            
+            this.lands = this.lands.filter(l => l.id !== id);
+
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'The land has been deleted.',
+              icon: 'success',
+              timer: 1500,
+              showConfirmButton: false
+            });
+          },
+          error: (err) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'Failed to delete the land.',
+              icon: 'error'
+            });
+            console.error('Delete error:', err);
+          }
+        });
+
+      }
+    });
   }
 }

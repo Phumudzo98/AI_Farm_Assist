@@ -39,11 +39,12 @@ const routes: Routes = [
     { path: 'view-land/:id', component: ViewLandComponent },
     {path:'land-list/:id', component: LandListComponent },
      {path:'view-crop/:landId/:cropId', component:ViewCropComponent },
+      {path:'view-crop/:cropId', component:ViewCropComponent },
     {path:'crop-list/:id', component: CropListComponent  },
-    {path:'pest-disease', component: PestDiseaseComponent },
-    { path: 'pest-disease/:cropId', component: PestDiseaseComponent }, 
+  { path: 'pest-disease/:cropId', component: PestDiseaseComponent }, // create
+{ path: 'pest-disease/:cropId/edit/:id', component: PestDiseaseComponent }, // edit
     {path:'pest-disease-list', component: PestDiseaseListComponent },
-    {path:'pest-disease-list/:id', component: PestDiseaseListComponent },
+    {path:'pest-disease-list/:cropId', component: PestDiseaseListComponent },
     { path: 'soil-info/:id', component: SoilInfoComponent },
    { path: 'task-activity/:id', component: TaskActivityComponent },
 ];

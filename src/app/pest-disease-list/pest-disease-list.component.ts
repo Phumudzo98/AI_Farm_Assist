@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../service/environments/environment';
+import { log } from 'console';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pest-disease-list',
@@ -9,12 +13,37 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class PestDiseaseListComponent implements OnInit {
   cropId!: number;
   records: any[] = [];
+  apiUrl:any=environment.apiUrl;
 
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  crops:any;
+  id:any;
+
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.cropId = Number(this.route.snapshot.paramMap.get('cropId'));
-    this.loadRecords();
+    this.id=Number(this.route.snapshot.paramMap.get('id'));
+
+    const token = localStorage.getItem('token'); 
+    
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+    this.http.get<any>(this.apiUrl+"/pest-disease/by-crop/"+this.cropId,{headers}).subscribe((data)=>
+    {
+      console.log(data);
+      this.crops=data;
+      
+    }, error=>
+    {
+      console.log(error);
+      
+    })
+    
+    //this.loadRecords();
   }
 
   loadRecords(): void {
@@ -27,17 +56,62 @@ export class PestDiseaseListComponent implements OnInit {
     }, 500);
   }
 
-  editRecord(id: number) {
-    this.router.navigate(['/pest-disease', this.cropId]);
-  }
+ editRecord(recordId: number) {
+  this.router.navigate(['/pest-disease', this.cropId, 'edit', recordId]);
+}
 
-  deleteRecord(id: number) {
-    if (confirm('Are you sure you want to delete this record?')) {
-      this.records = this.records.filter(r => r.id !== id);
-    }
+
+  deleteRecord(id: number): void {
+
+    const token = localStorage.getItem('token'); 
+    
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This record will be permanently deleted.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      cancelButtonText: 'Cancel'
+    }).then(result => {
+
+      if (result.isConfirmed) {
+
+        
+        this.http.delete(`${this.apiUrl}/pest-disease/${id}`, {headers}).subscribe({
+          next: () => {
+           
+            this.records = this.records.filter(r => r.id !== id);
+
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'Record has been deleted.',
+              icon: 'success',
+              timer: 1500,
+              showConfirmButton: false
+            });
+          },
+
+          error: (err) => {
+            Swal.fire({
+              title: 'Error!',
+              text: 'Failed to delete the record.',
+              icon: 'error'
+            });
+            console.error('DELETE error:', err);
+          }
+        });
+
+      }
+
+    });
   }
 
   addNew() {
-    this.router.navigate(['/pest-disease']);
+    this.router.navigate(['/pest-disease', this.cropId]);
   }
 }
