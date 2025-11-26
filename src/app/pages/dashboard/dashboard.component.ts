@@ -13,6 +13,24 @@ interface WeatherData {
   rainfall: string;
 }
 
+interface DailyWeather {
+  dt: number;
+  temp: {
+    day: number;
+    min: number;
+    max: number;
+    night: number;
+    eve: number;
+    morn: number;
+  };
+  humidity: number;
+  rain?: number;
+  pop: number; // probability of precipitation
+  weather: { main: string; description: string; icon: string }[];
+  uvi: number;
+}
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -79,7 +97,7 @@ export class DashboardComponent implements OnInit {
 
     // Expected backend response example:
     // { totalLands: 4, totalCrops: 120, pestCount: 5, diseaseCount: 2, healthyCrops: 90, moderateCrops:20, criticalCrops:10 }
-    this.http.get<any>(`${this.apiUrl}/farm/dashboard-stats/${farmId}`, { headers }).subscribe({
+    this.http.get<any>(`${this.apiUrl}/farm/farm-summary/${farmId}`, { headers }).subscribe({
       next: (data) => {
         this.stats = data || {};
         this.populateStatList();
@@ -114,32 +132,40 @@ export class DashboardComponent implements OnInit {
       error: (err) => { console.error('recentActivity error', err); this.recentActivity = []; }
     });
   }
+dailyWeather: DailyWeather[] = [];
+todayWeather!: DailyWeather;
 
-  getFullForecast(farmId: number) {
-    const token = localStorage.getItem('token');
-    const headers = { 'Authorization': `Bearer ${token}` };
+getFullForecast(farmId: number) {
+  const token = localStorage.getItem('token'); 
+  const headers = { 'Authorization': `Bearer ${token}` };
 
-    this.http.get<any>(`${this.apiUrl}/weather/daily/${farmId}`, { headers }).subscribe({
-      next: (data) => {
-        // adapt to your weather API shape
-        const d0 = data?.daily?.[0];
-        if (d0) {
-          this.weather = {
-            temperature: d0.temp ?? this.weather.temperature,
-            condition: d0.condition ?? this.weather.condition,
-            humidity: d0.humidity ?? this.weather.humidity,
-            rainfall: d0.rainfall ?? this.weather.rainfall
-          };
-        }
-        // update AI insights
-        this.aiInsights = this.generateInsights(this.weather);
-      },
-      error: (err) => {
-        console.error('getFullForecast error', err);
-        this.aiInsights = this.generateInsights(this.weather);
-      }
-    });
+  this.http.get<any>(`${this.apiUrl}/weather/daily/${farmId}`, { headers })
+    .subscribe(data => {
+      this.dailyWeather = data.daily;
+      this.todayWeather = this.dailyWeather[0]; // first day = today
+
+      // Optional: generate AI insights
+      this.aiInsights = this.generateInsightsFromWeather(this.todayWeather);
+    }, error => console.log(error));
+}
+
+generateInsightsFromWeather(weather: DailyWeather): string[] {
+  const insights: string[] = [];
+
+  if (weather.pop > 0.5 || (weather.rain ?? 0) > 5) {
+    insights.push("No need to water today, enough rain expected.");
+  } else if (weather.temp.day > 25) {
+    insights.push("High temperature: irrigate crops as needed.");
+  } else {
+    insights.push("Monitor soil moisture for best results.");
   }
+
+  if (weather.uvi > 10) insights.push("UV is high: protect sensitive crops.");
+  if (weather.humidity < 40) insights.push("Low humidity: crops may need extra watering.");
+
+  return insights;
+}
+
 
   // --- UI helpers --------------------------------------------------------
   populateStatList() {

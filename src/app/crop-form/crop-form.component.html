@@ -6,6 +6,8 @@
     </h2>
 
     <form [formGroup]="cropForm" (ngSubmit)="onSubmit()" *ngIf="!loading; else loadingSpinner">
+
+      <!-- Crop Name & Variety -->
       <div class="row g-3">
         <div class="col-6">
           <input type="text" formControlName="cropName" placeholder="Crop Name" class="form-control underline-input input-lg">
@@ -15,6 +17,7 @@
         </div>
       </div>
 
+      <!-- Planting & Expected Harvest Dates -->
       <div class="row g-3 mt-3">
         <div class="col-6">
           <label class="form-label small-label">Planting Date</label>
@@ -26,6 +29,7 @@
         </div>
       </div>
 
+      <!-- Actual Harvest & Yield -->
       <div class="row g-3 mt-3">
         <div class="col-6">
           <label class="form-label small-label">Actual Harvest Date</label>
@@ -39,21 +43,36 @@
         </div>
       </div>
 
+      <!-- Growth Stage & Health Status -->
       <div class="row g-3 mt-3">
         <div class="col-6">
-          <input type="text" formControlName="growthStage" placeholder="Growth Stage" class="form-control underline-input input-lg">
+          <label class="form-label small-label">Growth Stage</label>
+          <select formControlName="growthStage" class="form-control underline-input input-lg">
+            <option value="">Select Growth Stage</option>
+            <option value="Seedling">Seedling</option>
+            <option value="Vegetative">Vegetative</option>
+            <option value="Flowering">Flowering</option>
+            <option value="Harvest">Harvest</option>
+          </select>
         </div>
         <div class="col-6">
-          <input type="text" formControlName="healthStatus" placeholder="Health Status" class="form-control underline-input input-lg">
+          <label class="form-label small-label">Health Status</label>
+          <select formControlName="healthStatus" class="form-control underline-input input-lg">
+            <option value="">Select Health Status</option>
+            <option value="Good">Good</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Critical">Critical</option>
+          </select>
         </div>
       </div>
-      
 
+      <!-- Submit Button -->
       <button type="submit" class="btn w-100 mt-4 btn-lg" style="background-color: #367C2B; color: white; border-radius: 10px;">
         {{ isEditMode ? 'Update Crop' : 'Save Crop' }}
       </button>
     </form>
 
+    <!-- Loading Spinner -->
     <ng-template #loadingSpinner>
       <div class="text-center py-5">
         <div class="spinner-border text-success" role="status"></div>
@@ -61,6 +80,7 @@
       </div>
     </ng-template>
 
+    <!-- Back Link -->
     <p class="mt-4 text-center">
       Want to go back? 
       <a [routerLink]="['/crop-list', landId]" style="color: #367C2B; font-weight: 600;">Crop List</a>

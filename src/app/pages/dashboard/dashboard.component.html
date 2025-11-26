@@ -17,7 +17,6 @@
       <li><a [routerLink]="['/weather', id]">Weather</a></li>
       <li><a [routerLink]="['/land-list', id]">Farm Sections</a></li>
       <li><a [routerLink]="['/ask-ai']">Ask AI</a></li>
-      <li><a href="#">Reports</a></li>
       <li><a [routerLink]="['/select-a-farm']">Switch farm</a></li>
       <li><a (click)="logout()">Logout</a></li>
     </ul>
@@ -28,11 +27,11 @@
     <header class="dashboard-header">
       <div>
         <h1>{{ farmData.farmName }} Dashboard</h1>
-        <p class="muted">Location: {{ farmData.location || '—' }} • Owner: {{ farmData.ownerName || '—' }}</p>
+        <p class="muted">Location: {{ farmData.farm_location || '—' }} • Owner: {{ farmData.ownerName || '—' }}</p>
       </div>
 
       <div class="header-actions">
-        <button class="btn-add-farm" (click)="goToAddFarm()">+ Add New Farm</button>
+        
         <button class="btn" (click)="refreshAll()" title="Refresh">⟳</button>
       </div>
     </header>
@@ -53,31 +52,29 @@
         </div>
 
         <!-- Weather + AI -->
-        <div class="card weather-card">
-          <div class="card-header">
-            <h3>Weather</h3>
-            <span class="icon">🌤️</span>
-          </div>
+       <div class="card weather-card">
+  <div class="card-header">
+    <h2>Weather Today</h2>
+    <span class="icon">🌤️</span>
+  </div>
+  <div class="card-body" *ngIf="todayWeather">
+    <p class="temperature">{{ todayWeather.temp.day }}°C</p>
+    <p class="condition">{{ todayWeather.weather[0].description }}</p>
+    <div class="weather-details">
+      <span>💧 Humidity: {{ todayWeather.humidity }}%</span>
+      <span>🌧️ Rain: {{ todayWeather.rain ?? 0 }}mm</span>
+      <span>☀️ UV Index: {{ todayWeather.uvi }}</span>
+    </div>
 
-          <div class="card-body weather-body">
-            <div class="weather-main">
-              <div class="temp">{{ weather.temperature }}</div>
-              <div class="cond">{{ weather.condition }}</div>
-            </div>
+    <div class="ai-recommendation mt-3">
+      <h4>💡 Watering / Crop Advice</h4>
+      <ul>
+        <li *ngFor="let insight of aiInsights">{{ insight }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-            <div class="weather-meta">
-              <div>💧 {{ weather.humidity }}</div>
-              <div>🌧️ {{ weather.rainfall }}</div>
-            </div>
-
-            <div class="ai-recommendation">
-              <h4>💡 Watering Advice</h4>
-              <ul>
-                <li *ngFor="let insight of aiInsights">{{ insight }}</li>
-              </ul>
-            </div>
-          </div>
-        </div>
 
         <!-- Recent activity -->
         <div class="card activity-card">
@@ -108,7 +105,7 @@
       <div class="col-right">
 
         <!-- Quick actions -->
-        <div class="card quick-actions">
+        <!-- <div class="card quick-actions">
           <h3>Quick Actions</h3>
           <div class="actions-grid">
             <button (click)="goToAddCrop()" class="action-btn">🌱 Add Crop</button>
@@ -116,7 +113,7 @@
             <button (click)="goToAddPest()" class="action-btn">🪲 Add Pest/Disease</button>
             <button (click)="goToReports()" class="action-btn">📊 Reports</button>
           </div>
-        </div>
+        </div> -->
 
         <!-- Crop health chart -->
         <div class="card health-card">
