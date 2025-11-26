@@ -3,12 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../service/environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-land-form',
   templateUrl: './land-form.component.html',
   styleUrls: ['./land-form.component.scss']
 })
+
 export class LandFormComponent implements OnInit {
   landForm!: FormGroup;
   landId!: number | null;
@@ -93,31 +95,53 @@ export class LandFormComponent implements OnInit {
     if (this.landForm.invalid) return;
 
     const landData = this.landForm.value;
+    const token = localStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' };
+
     if (this.isEditMode) {
-      console.log('Updating Land:', landData);
-      alert('Land updated successfully!');
+      // Update land
+      this.http.put(`${this.apiUrl}/farm/update-land/${this.landId}`, landData, { headers }).subscribe({
+        next: (res) => {
+          Swal.fire({
+            title: 'Updated!',
+            text: 'Land updated successfully.',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
+          this.router.navigate(['/land-list', this.landId]);
+        },
+        error: (err) => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Failed to update land.',
+            icon: 'error'
+          });
+          console.error(err);
+        }
+      });
     } else {
-
-       const token = localStorage.getItem('token'); 
-    
-
-    const headers = {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    };
-
-      this.http.post<any>(this.apiUrl+"/farm/add-land/"+this.landId, landData, {headers}).subscribe((data)=>
-      {
-        console.log(data);
-        
-      },error=>
-      {
-        console.log(error);
-        
-      })
-      console.log('Adding Land:', landData);
-      alert('Land added successfully!');
+     
+      this.http.post(`${this.apiUrl}/farm/add-land/${this.landId}`, landData, { headers }).subscribe({
+        next: (res) => {
+          Swal.fire({
+            title: 'Added!',
+            text: 'Land added successfully.',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          });
+          this.router.navigate(['/land-list', this.landId]);
+        },
+        error: (err) => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Failed to add land.',
+            icon: 'error'
+          });
+          console.error(err);
+        }
+      });
     }
-    this.router.navigate(['/lands', this.landId]);
   }
 }

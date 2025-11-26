@@ -2,7 +2,11 @@
   <!-- Top Header Strip -->
   <div class="top-header">
     <span class="menu-icon" (click)="toggleMenu()">☰</span>
-    <img class="profile-pic" [src]="userProfilePic" alt="User Profile" />
+
+    <div class="header-right">
+      <button class="btn-back" [routerLink]="['/dashboard', id]">← Back</button>
+      <img class="profile-pic" [src]="userProfilePic" alt="User Profile" />
+    </div>
   </div>
 
   <!-- Sliding Side Menu -->
@@ -10,60 +14,164 @@
     <div class="close-btn" (click)="toggleMenu()">×</div>
     <ul>
       <li><a [routerLink]="['/dashboard', id]">Dashboard</a></li>
-      <li><a  [routerLink]="['/weather', id]">Weather</a></li>
+      <li><a [routerLink]="['/weather', id]">Weather</a></li>
       <li><a [routerLink]="['/land-list', id]">Farm Sections</a></li>
       <li><a [routerLink]="['/ask-ai']">Ask AI</a></li>
-      <li><a href="#">Reports</a></li>
       <li><a [routerLink]="['/select-a-farm']">Switch farm</a></li>
       <li><a (click)="logout()">Logout</a></li>
     </ul>
   </nav>
 
   <!-- Overlay Content -->
-  <div *ngIf="farmData!=null" class="dashboard-content" [class.shifted]="menuOpen">
+  <div *ngIf="farmData" class="dashboard-content" [class.shifted]="menuOpen">
     <header class="dashboard-header">
-      <h1>{{ farmData.farmName }} Dashboard</h1>
-      <button class="btn-add-farm" (click)="goToAddFarm()">Add New Farm</button>
+      <div>
+        <h1>{{ farmData.farmName }} Dashboard</h1>
+        <p class="muted">Location: {{ farmData.farm_location || '—' }} • Owner: {{ farmData.ownerName || '—' }}</p>
+      </div>
+
+      <div class="header-actions">
+        
+        <button class="btn" (click)="refreshAll()" title="Refresh">⟳</button>
+      </div>
     </header>
 
-    <div class="dashboard-grid">
-      <!-- Weather Widget with AI Recommendation -->
-      <div class="card weather-card">
-        <div class="card-header">
-          <h2>Weather</h2>
-          <span class="icon">🌤️</span>
+    <section class="dashboard-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="col-left">
+
+        <!-- Stats overview -->
+        <div class="card stats-card">
+          <div class="card-row">
+            <div class="stat-box" *ngFor="let s of statList">
+              <div class="stat-value">{{ s.value ?? 0 }}</div>
+              <div class="stat-label">{{ s.label }}</div>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
-          <p class="temperature">{{ weather.temperature }}</p>
-          <p class="condition">{{ weather.condition }}</p>
-          <div class="weather-details">
-            <span>💧 {{ weather.humidity }}</span>
-            <span>🌧️ {{ weather.rainfall }}</span>
+
+        <!-- Weather + AI -->
+       <div class="card weather-card">
+  <div class="card-header">
+    <h2>Weather Today</h2>
+    <span class="icon">🌤️</span>
+  </div>
+  <div class="card-body" *ngIf="todayWeather">
+    <p class="temperature">{{ todayWeather.temp.day }}°C</p>
+    <p class="condition">{{ todayWeather.weather[0].description }}</p>
+    <div class="weather-details">
+      <span>💧 Humidity: {{ todayWeather.humidity }}%</span>
+      <span>🌧️ Rain: {{ todayWeather.rain ?? 0 }}mm</span>
+      <span>☀️ UV Index: {{ todayWeather.uvi }}</span>
+    </div>
+
+    <div class="ai-recommendation mt-3">
+      <h4>💡 Watering / Crop Advice</h4>
+      <ul>
+        <li *ngFor="let insight of aiInsights">{{ insight }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+        <!-- Recent activity -->
+        <div class="card activity-card">
+          <div class="card-header">
+            <h3>Recent Activity</h3>
+            <a class="view-all" (click)="goToActivity()">View all</a>
           </div>
 
-          <!-- AI Watering Recommendation -->
-          <div class="ai-recommendation mt-3">
-            <h4>💡 Watering Advice</h4>
-            <ul>
-              <li *ngFor="let insight of aiInsights">{{ insight }}</li>
+          <div class="card-body">
+            <ul class="activity-list">
+              <li *ngFor="let a of recentActivity">
+                <div class="act-left">
+                  <div class="act-time">{{ a.timestamp | date:'short' }}</div>
+                  <div class="act-msg">{{ a.message }}</div>
+                </div>
+                <div class="act-right">
+                  <button class="btn-link" *ngIf="a.link" (click)="navigateTo(a.link)">Open</button>
+                </div>
+              </li>
+
+              <li *ngIf="recentActivity?.length === 0" class="empty">No recent activity.</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <!-- Farm Operations -->
-      <div class="card operations-card">
-        <div class="card-header">
-          <h2>Farm Operations</h2>
-          <span class="icon">🚜</span>
+      <!-- RIGHT COLUMN -->
+      <div class="col-right">
+
+        <!-- Quick actions -->
+        <!-- <div class="card quick-actions">
+          <h3>Quick Actions</h3>
+          <div class="actions-grid">
+            <button (click)="goToAddCrop()" class="action-btn">🌱 Add Crop</button>
+            <button (click)="goToAddLand()" class="action-btn">➕ Add Land</button>
+            <button (click)="goToAddPest()" class="action-btn">🪲 Add Pest/Disease</button>
+            <button (click)="goToReports()" class="action-btn">📊 Reports</button>
+          </div>
+        </div> -->
+
+        <!-- Crop health chart -->
+        <div class="card health-card">
+          <div class="card-header">
+            <h3>Crop Health</h3>
+            <a class="view-all" (click)="goToCrops()">Details</a>
+          </div>
+
+          <div class="card-body chart-body">
+            <canvas baseChart
+                    [data]="healthChartData"
+                    [type]="'doughnut'"
+                    [options]="healthChartOptions">
+            </canvas>
+
+            <div class="health-legend">
+              <div class="legend-item">
+                <span class="dot good"></span>Good ({{ stats?.healthyCrops ?? 0 }})
+              </div>
+              <div class="legend-item">
+                <span class="dot moderate"></span>Moderate ({{ stats?.moderateCrops ?? 0 }})
+              </div>
+              <div class="legend-item">
+                <span class="dot critical"></span>Critical ({{ stats?.criticalCrops ?? 0 }})
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="card-body operations-buttons">
-          <button>🌱 Crops</button>
-          <button>🐄 Livestock</button>
-          <button>💧 Irrigation</button>
-          <button>📊 Reports</button>
+
+        <!-- Sections grid -->
+        <div class="card sections-card">
+          <div class="card-header">
+            <h3>Farm Sections</h3>
+            <a class="view-all" (click)="goToSections()">View all</a>
+          </div>
+
+          <div class="card-body sections-grid">
+            <div class="section-box" *ngFor="let land of lands">
+              <h4>{{ land.sectionName }}</h4>
+              <p>Soil: {{ land.soilType }}</p>
+              <p>Size: {{ land.size }} {{ land.metrics }}</p>
+              <p>Crop count: {{ land.cropCount ?? 0 }}</p>
+              <div class="section-actions">
+                <button (click)="viewLand(land.id)">View</button>
+                <button (click)="goToAddCropForLand(land.id)">+ Crop</button>
+              </div>
+            </div>
+
+            <div *ngIf="lands?.length === 0" class="empty">No sections yet.</div>
+          </div>
         </div>
+
       </div>
-    </div>
+    </section>
+  </div>
+
+  <div *ngIf="!farmData" class="loading-placeholder">
+    <div class="spinner-border" role="status"></div>
+    <p>Loading dashboard…</p>
   </div>
 </div>
