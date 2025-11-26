@@ -23,6 +23,7 @@ import { PestDiseaseComponent } from './pest-disease/pest-disease.component';
 import { PestDiseaseListComponent } from './pest-disease-list/pest-disease-list.component';
 import { SoilInfoComponent } from './soil-info/soil-info.component';
 import { TaskActivityComponent } from './task-activity/task-activity.component';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -51,8 +52,10 @@ import { TaskActivityComponent } from './task-activity/task-activity.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+     NgChartsModule,
     ReactiveFormsModule,
     HttpClientModule,
+   
   ],
   providers: [
     
