@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../service/environments/environment';
 
 @Component({
   selector: 'app-land-form',
@@ -12,6 +14,7 @@ export class LandFormComponent implements OnInit {
   landId!: number | null;
   isEditMode = false;
   loading = true;
+  apiUrl:any=environment.apiUrl;
 
 
   mockLands = [
@@ -48,12 +51,13 @@ export class LandFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private http:HttpClient
   ) {}
 
   ngOnInit(): void {
     this.landId = Number(this.route.snapshot.paramMap.get('id'));
-    this.isEditMode = !!this.landId;
+    //this.isEditMode = !!this.landId;
 
     this.landForm = this.fb.group({
       sectionName: ['', Validators.required],
@@ -93,9 +97,27 @@ export class LandFormComponent implements OnInit {
       console.log('Updating Land:', landData);
       alert('Land updated successfully!');
     } else {
+
+       const token = localStorage.getItem('token'); 
+    
+
+    const headers = {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    };
+
+      this.http.post<any>(this.apiUrl+"/farm/add-land/"+this.landId, landData, {headers}).subscribe((data)=>
+      {
+        console.log(data);
+        
+      },error=>
+      {
+        console.log(error);
+        
+      })
       console.log('Adding Land:', landData);
       alert('Land added successfully!');
     }
-    this.router.navigate(['/lands']);
+    this.router.navigate(['/lands', this.landId]);
   }
 }

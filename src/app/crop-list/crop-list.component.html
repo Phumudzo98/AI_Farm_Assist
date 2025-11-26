@@ -19,9 +19,9 @@
     <tbody>
       <tr *ngFor="let crop of crops; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ crop.name }}</td>
-        <td>{{ crop.type }}</td>
-        <td>{{ crop.plantedDate | date }}</td>
+        <td>{{ crop.cropName }}</td>
+        <td>{{ crop.variety }}</td>
+        <td>{{ crop.plantingDate}}</td>
         <td>
           <button class="btn btn-sm btn-success me-2" (click)="viewCrop(crop.id)">View</button>
        <button class="btn btn-sm btn-edit" (click)="editCrop(crop.id)">Edit</button>

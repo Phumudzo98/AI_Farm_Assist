@@ -77,7 +77,7 @@
     </ng-template>
 
     <p class="mt-4 text-center">
-      <a routerLink="/land-list" style="color: #367C2B; font-weight: 600;">Back to Land List</a>
+      <a [routerLink]="['/land-list', landId]" style="color: #367C2B; font-weight: 600;">Back to Land List</a>
     </p>
   </div>
 </div>

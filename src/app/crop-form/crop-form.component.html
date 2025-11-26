@@ -47,13 +47,7 @@
           <input type="text" formControlName="healthStatus" placeholder="Health Status" class="form-control underline-input input-lg">
         </div>
       </div>
-
-      <div class="mt-3">
-        <select formControlName="landDetails" class="form-control underline-input input-lg">
-          <option value="">Select Land Plot</option>
-          <option *ngFor="let land of lands" [value]="land.id">{{ land.landName }}</option>
-        </select>
-      </div>
+      
 
       <button type="submit" class="btn w-100 mt-4 btn-lg" style="background-color: #367C2B; color: white; border-radius: 10px;">
         {{ isEditMode ? 'Update Crop' : 'Save Crop' }}
@@ -69,7 +63,7 @@
 
     <p class="mt-4 text-center">
       Want to go back? 
-      <a routerLink="/crop-list" style="color: #367C2B; font-weight: 600;">Crop List</a>
+      <a [routerLink]="['/crop-list', landId]" style="color: #367C2B; font-weight: 600;">Crop List</a>
     </p>
   </div>
 </div>

@@ -125,6 +125,8 @@ export class DashboardComponent implements OnInit {
       console.log(error);
       
     })
+
+    
   }
 
   toggleMenu() {

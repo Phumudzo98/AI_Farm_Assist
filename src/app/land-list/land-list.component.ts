@@ -40,27 +40,6 @@ export class LandListComponent implements OnInit {
       
     })
 
- 
-    this.lands = [
-      {
-        id: 1,
-        sectionName: 'Plot A',
-        soilType: 'Loamy',
-        irrigationType: 'Drip',
-        underCultivation: true,
-        size: 5,
-        metrics: 'hectares'
-      },
-      {
-        id: 2,
-        sectionName: 'Plot B',
-        soilType: 'Sandy',
-        irrigationType: 'Sprinkler',
-        underCultivation: false,
-        size: 3.5,
-        metrics: 'hectares'
-      }
-    ];
   }
 
  viewLand(landId: number) {
