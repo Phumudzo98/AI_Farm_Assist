@@ -1,15 +1,15 @@
 <div class="dashboard-container">
-  <!-- Top Header Strip -->
+ 
   <div class="top-header">
     <span class="menu-icon" (click)="toggleMenu()">☰</span>
 
     <div class="header-right">
-      <button class="btn-back" [routerLink]="['/dashboard', id]">← Back</button>
+      <button class="btn-back" [routerLink]="['/select-a-farm']">← Back</button>
       <img class="profile-pic" [src]="userProfilePic" alt="User Profile" />
     </div>
   </div>
 
-  <!-- Sliding Side Menu -->
+  
   <nav class="side-menu" [class.open]="menuOpen">
     <div class="close-btn" (click)="toggleMenu()">×</div>
     <ul>
@@ -22,7 +22,7 @@
     </ul>
   </nav>
 
-  <!-- Overlay Content -->
+  
   <div *ngIf="farmData" class="dashboard-content" [class.shifted]="menuOpen">
     <header class="dashboard-header">
       <div>
@@ -38,10 +38,10 @@
 
     <section class="dashboard-grid">
 
-      <!-- LEFT COLUMN -->
+      
       <div class="col-left">
 
-        <!-- Stats overview -->
+       
         <div class="card stats-card">
           <div class="card-row">
             <div class="stat-box" *ngFor="let s of statList">
@@ -51,7 +51,7 @@
           </div>
         </div>
 
-        <!-- Weather + AI -->
+        
        <div class="card weather-card">
   <div class="card-header">
     <h2>Weather Today</h2>
@@ -76,7 +76,7 @@
 </div>
 
 
-        <!-- Recent activity -->
+        
         <div class="card activity-card">
           <div class="card-header">
             <h3>Recent Activity</h3>
@@ -101,7 +101,7 @@
         </div>
       </div>
 
-      <!-- RIGHT COLUMN -->
+      
       <div class="col-right">
 
         <!-- Quick actions -->
@@ -143,7 +143,7 @@
           </div>
         </div>
 
-        <!-- Sections grid -->
+        
         <div class="card sections-card">
           <div class="card-header">
             <h3>Farm Sections</h3>

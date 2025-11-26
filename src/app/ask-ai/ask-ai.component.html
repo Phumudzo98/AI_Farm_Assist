@@ -3,6 +3,7 @@
   <p class="subtitle">Got any questions, farm-related?</p>
 
   <div class="content-row">
+    <!-- Upload Box -->
     <div class="upload-box" (click)="fileInput.click()">
       <ng-container *ngIf="previewUrl; else uploadIcon">
         <img [src]="previewUrl" class="preview-image" alt="Uploaded Image">
@@ -16,24 +17,38 @@
       <input type="file" hidden #fileInput (change)="onFileSelected($event)">
     </div>
 
+    <!-- Message Box -->
     <div class="message-box">
       <textarea [(ngModel)]="message" placeholder="Enter a message..."></textarea>
-
       <button class="send-btn" (click)="sendMessage()" [disabled]="loading">
         <span *ngIf="!loading">Send</span>
+        <span *ngIf="loading">Sending...</span>
       </button>
+    </div>
+  </div>
 
-      <div class="ai-response" *ngIf="aiResponse">
-        {{ aiResponse }}
+  <!-- Conversation -->
+  <div class="conversation">
+    <div *ngFor="let chat of conversation" class="chat-message">
+      <!-- User Message -->
+      <div class="user-message">
+        <p>{{ chat.userMessage }}</p>
+        <img *ngIf="chat.userImage" [src]="chat.userImage" class="preview-image" alt="Uploaded Image">
+      </div>
+
+      <!-- AI Response -->
+      <div class="ai-response">
+        {{ chat.aiResponse }}
       </div>
     </div>
   </div>
 
+  <!-- Footer -->
   <p class="footer-text">
     I'm stumped as a fence post until you ask something.
   </p>
 
-  <!-- 🔹 Spinner overlay -->
+  <!-- Loading Overlay -->
   <div class="loading-overlay" *ngIf="loading">
     <div class="spinner"></div>
     <p class="loading-text">Analyzing your request...</p>

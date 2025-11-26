@@ -223,7 +223,7 @@ textarea {
   cursor: not-allowed;
 }
 
-/* 🔹 Scrollable AI response box */
+
 .ai-response {
   background: #f7f7f7;
   border-radius: 10px;
@@ -236,7 +236,7 @@ textarea {
   border: 1px solid #ddd;
 }
 
-/* 🔹 Fullscreen overlay for spinner */
+
 .loading-overlay {
   position: fixed;
   inset: 0;
@@ -277,5 +277,25 @@ textarea {
   margin-top: 30px;
   color: #777;
 }
+
+.chat-message {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-message {
+  background: #e1f5e1;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.ai-response {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 
 

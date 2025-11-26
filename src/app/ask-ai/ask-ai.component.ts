@@ -1,20 +1,29 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../service/environments/environment.prod';
-// adjust if your environment file path differs
+
+
+
+interface ChatMessage {
+  userMessage: string;
+  userImage?: string | ArrayBuffer | null;
+  aiResponse: string;
+}
 
 @Component({
   selector: 'app-ask-ai',
   templateUrl: './ask-ai.component.html',
   styleUrls: ['./ask-ai.component.scss']
 })
+
+
 export class AskAiComponent {
   message: string = '';
   selectedFile: File | null = null;
   previewUrl: string | ArrayBuffer | null = null;
-  aiResponse: string = '';
-  apiUrl = environment.apiUrl; // e.g., http://localhost:8080
-  loading: boolean = false; // 👈 new flag
+  loading: boolean = false;
+  conversation: ChatMessage[] = [];  // stores all messages
+  apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
@@ -36,42 +45,52 @@ export class AskAiComponent {
       return;
     }
 
-    this.loading = true; 
+    this.loading = true;
 
     const formData = new FormData();
     formData.append('prompt', this.message);
-   if (this.selectedFile) {
-  formData.append('file', this.selectedFile);
-  } else {
-    const emptyFile = new Blob([], { type: 'application/octet-stream' });
-    formData.append('file', emptyFile, 'empty.jpg');
-  }
+    if (this.selectedFile) {
+      formData.append('file', this.selectedFile);
+    } else {
+      const emptyFile = new Blob([], { type: 'application/octet-stream' });
+      formData.append('file', emptyFile, 'empty.jpg');
+    }
 
-    
-  const token = localStorage.getItem('token'); 
+    const token = localStorage.getItem('token');
+    const headers = { 'Authorization': `Bearer ${token}` };
 
-  const headers = {
-    'Authorization': `Bearer ${token}`
-  };
+    this.http.post(`${this.apiUrl}/farm/analyze`, formData, { 
+      headers,
+      responseType: 'text' 
+    }).subscribe({
+      next: (response) => {
+        // Add the current conversation to the list
+        this.conversation.push({
+          userMessage: this.message,
+          userImage: this.previewUrl,
+          aiResponse: response
+        });
 
-   this.http.post(`${this.apiUrl}/farm/analyze`, formData, { 
-  headers,
-  responseType: 'text' 
-}).subscribe({
-  next: (response) => {
-    this.aiResponse = response;
-    this.loading = false;
-  },
-  error: (err) => {
-    console.error('Error analyzing image:', err);
-    this.aiResponse = 'Error: Could not analyze the image.';
-    this.loading = false;
-  }
-});
+        this.loading = false;
 
-    
-    this.message = '';
-    this.previewUrl = null;
-    this.selectedFile = null;
+        // Clear message and selected file for the next question
+        this.message = '';
+        this.selectedFile = null;
+        this.previewUrl = null;
+      },
+      error: (err) => {
+        console.error('Error analyzing image:', err);
+        this.conversation.push({
+          userMessage: this.message,
+          userImage: this.previewUrl,
+          aiResponse: 'Error: Could not analyze the image.'
+        });
+        this.loading = false;
+        this.message = '';
+        this.selectedFile = null;
+        this.previewUrl = null;
+      }
+    });
   }
 }
+
