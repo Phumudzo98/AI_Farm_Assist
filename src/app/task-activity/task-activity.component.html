@@ -1,5 +1,7 @@
 <div class="container mt-4">
-  <button class="btn btn-outline-success mb-3" (click)="goBack()">← Back to Land Details</button>
+  <button class="btn btn-outline-success mb-3" (click)="goBack()">
+    ← Back to Land Details
+  </button>
 
   <h2 class="mb-4">Task Activities</h2>
 
@@ -12,6 +14,7 @@
         <th>Date</th>
         <th>Status</th>
         <th>Assigned To</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +25,21 @@
         <td>{{ task.taskDate | date }}</td>
         <td>{{ task.status }}</td>
         <td>{{ task.assignedTo }}</td>
+
+        
+       <td class="center-btn">
+  <button class="btn btn-outline-primary btn-sm no-border-btn"
+          [routerLink]="['/add-edit-task']"
+          [state]="{ task: task }">
+    Edit
+  </button>
+</td>
+
       </tr>
     </tbody>
   </table>
+
+  <button class="btn btn-success mb-3" [routerLink]="['/add-edit-task']">
+    + Add Task
+  </button>
 </div>

@@ -19,6 +19,7 @@ import {PestDiseaseComponent } from './pest-disease/pest-disease.component';
 import { PestDiseaseListComponent } from './pest-disease-list/pest-disease-list.component';
 import { SoilInfoComponent } from './soil-info/soil-info.component';
 import { TaskActivityComponent } from './task-activity/task-activity.component';
+import { AddEditTaskComponent } from './add-edit-task/add-edit-task.component';
 
 const routes: Routes = [
 
@@ -46,7 +47,8 @@ const routes: Routes = [
     {path:'pest-disease-list', component: PestDiseaseListComponent },
     {path:'pest-disease-list/:cropId', component: PestDiseaseListComponent },
     { path: 'soil-info/:id', component: SoilInfoComponent },
-   { path: 'task-activity/:id', component: TaskActivityComponent },
+   { path: 'task-activity', component: TaskActivityComponent },
+    { path: 'add-edit-task', component: AddEditTaskComponent},
 ];
 
 @NgModule({

@@ -23,6 +23,7 @@ import { PestDiseaseComponent } from './pest-disease/pest-disease.component';
 import { PestDiseaseListComponent } from './pest-disease-list/pest-disease-list.component';
 import { SoilInfoComponent } from './soil-info/soil-info.component';
 import { TaskActivityComponent } from './task-activity/task-activity.component';
+import { AddEditTaskComponent } from './add-edit-task/add-edit-task.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { TaskActivityComponent } from './task-activity/task-activity.component';
     PestDiseaseComponent,
     PestDiseaseListComponent,
     SoilInfoComponent,
-    TaskActivityComponent
+    TaskActivityComponent,
+    AddEditTaskComponent
   ],
   imports: [
     BrowserModule,
